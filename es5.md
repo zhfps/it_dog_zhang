@@ -140,6 +140,8 @@
 
 - arguments.callee
 
+- 立即执行()()
+
 ###### 3.面对对象  
 
 - object属性定义
@@ -166,6 +168,71 @@
 
 - 原型prototype
 
+- 继承
+
+  - 原型链
+
+    
+  
+  
   
 
-  
+##### Jquery
+
+1. 扩充Jquery对象
+
+   - ```javascript
+     // jQuery.fn.extend 扩展 jQuery 元素集来提供
+     // 新的方法（通常用来制作插件）。
+     jQuery.fn.extend({
+         dogWang: function () {
+              console.log("汪汪")
+         }
+     });
+     
+      $(function () {
+               $('div').dogWang()
+      }) // 汪汪
+     ```
+
+   - ```javascript
+     // 扩展jQuery对象本身。
+     
+     // 用来在jQuery命名空间上增加新函数。
+     jQuery.extend({
+         dogWang: function () {
+             console.log("汪汪")
+         }
+     })
+     
+      $(function () {
+              $.dogWang()
+       }) // 汪汪
+     ```
+
+   - ```
+     // 属性方式扩展
+     jQuery.dogWang = function () {
+         console.log("wangwang")
+     }
+     
+      $(function () {
+              $.dogWang()
+       }) // 汪汪
+     ```
+
+   - ```
+     jQuery.prototype.dogWang = function (val) {
+         console.log(val)
+     }
+      $(function () {
+              $.prototype.dogWang("汪汪")
+       }) // 汪汪
+       $(function () {
+        var jquer = new jQuery()
+         jquer.dogWang("w")
+     }) // 
+     ```
+
+     
+
