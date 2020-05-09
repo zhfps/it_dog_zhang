@@ -13,8 +13,8 @@
 -   创建对象
 
   ```javascript
-  const obj = new Object();
-  const obj = {};
+        const obj = new Object();
+        const obj = {};
   ```
 
 - 给对象添加属性
@@ -26,9 +26,19 @@
 
 - 获取属性
 
-     obj.属性名
+     - obj.属性名
 
-    obj["属性"] 
+
+     - obj["属性"] 
+    
+     - 属性存在性测试，“in" 操作符
+    
+     const obj = {
+         name: 'obj'
+     }
+     window.onload = function () {
+         console.log("name" in obj) //true
+     }
 
 - 赋值
 
@@ -41,6 +51,30 @@
   ​	delete obj.属性名
 
   ​	delete obj["属性"] 
+  
+  - 对象的复制和合并 Object.assign()
+  
+    ```javascript
+    let user = {
+        name: "John",
+        age: 30
+    };
+    
+    let clone = Object.assign({}, user);
+    console.log(clone) // {name: "John",age:
+    //  30}
+    ```
+  
+  - 结构化克隆算法
+  
+    实现库lodash ,_.cloneDeep(obj)
+  
+  ###### Symbol 类型 （唯一标识符）
+  
+  ```javascript
+  let id = Symbol()
+   console.log(id)
+  ```
   
   ###### Arry
   
@@ -90,7 +124,7 @@
   
      every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回 true，则返回 true。
   
-      filter()：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。
+     filter()：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。
   
      forEach()：对数组中的每一项运行给定函数。这个方法没有返回值。 
   
@@ -136,11 +170,26 @@
 
   }
 
+- ```javascript
+  let func = new Function ([arg1, arg2, ...argN], functionBody);
+  ```
+
 - 没有重载,同名函数会覆盖原函数
 
 - arguments.callee
 
 - 立即执行()()
+
+- 递归和栈堆
+
+- 可变参数 ...
+
+- arguments (箭头函数没有argument)
+
+- **Spread** 语法 ...
+
+- 闭包
+
 
 ###### 3.面对对象  
 
@@ -167,14 +216,60 @@
 ###### 4.原型模式
 
 - 原型prototype
-
+- __proto__
 - 继承
 
   - 原型链
 
-    
+###### 5.数组
+
+- splice(添加，删除，插入)
+
+
+###### 6.类
+
+- 基本语法
+
+  ```javascript
+  class MyClass {
+    // class 方法
+    constructor() { ... }
+    method1() { ... }
+    method2() { ... }
+    method3() { ... }
+    ...
+  }
+  ```
+
+- extends
+
+- Mixin
+
+  ```javascript
+  // mixin
+  let sayHiMixin = {
+    sayHi() {
+      alert(`Hello ${this.name}`);
+    },
+    sayBye() {
+      alert(`Bye ${this.name}`);
+    }
+  };
   
+  // 用法：
+  class User {
+    constructor(name) {
+      this.name = name;
+    }
+  }
   
+  // 拷贝方法
+  Object.assign(User.prototype, sayHiMixin);
+  
+  // 现在 User 可以打招呼了
+  new User("Dude").sayHi(); // Hello Dude!
+  ```
+
   
 
 ##### Jquery
