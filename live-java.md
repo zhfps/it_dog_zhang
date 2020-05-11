@@ -201,3 +201,84 @@ public class TestUtil {
 用户名长度在6-10个字符之间
 密码长度在6-10个字符之间
 ```
+
+#### 反射
+
+1. 概念
+
+   JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+   要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象.
+   *反射就是把java类中的各种成分映射成一个个的Java对象*
+
+2. 通过反射获取对象
+
+   - 方法一
+
+     ```java
+     // 方法一
+     Class annoatinCalss = new AnnoationTest().getClass();
+     System.out.println(annoatinCalss.getName()); 
+     //output: com.live.zhf.learn.AnnoationTest
+                   
+     ```
+
+   - 方法二
+
+     ```java
+     // 方法二
+     Class annoationClass = AnnoationTest.class;
+     System.out.println(annoationClass.getName());
+     //output: com.live.zhf.learn.AnnoationTest
+     ```
+
+   - 方法三
+
+     ```java
+     try {
+         Class annoationClass = Class.forName("com.live.zhf.learn.AnnoationTest");
+         System.out.println(annoationClass.getName());
+     } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+     }
+     //output: com.live.zhf.learn.AnnoationTest
+     ```
+
+3. 通过反射获取构造器 创建对象
+
+   ```java
+         try {
+               Class annoationClass = Class.forName("com.live.zhf.learn.AnnoationTest");
+               //Constructor[] constructors = annoationClass.getConstructors();
+               //System.out.println(constructors.length);
+               Constructor constructor =     annoationClass.getConstructor(String.class,String.class);
+               //System.out.println(constructor);
+               //调用构造方法
+               AnnoationTest test =		     (AnnoationTest)constructor.newInstance("aadddd","xxxx");
+               //转JSON
+               Gson gson = new Gson();
+               String json = gson.toJson(test);
+               System.out.println(json);
+       } catch (ClassNotFoundException | NoSuchMethodException e) {
+           e.printStackTrace();
+       } catch (IllegalAccessException e) {
+               e.printStackTrace();
+           } catch (InstantiationException e) {
+               e.printStackTrace();
+           } catch (InvocationTargetException e) {
+               e.printStackTrace();
+           }
+       }
+   ```
+
+4. 通过反射获取属性
+
+   - 获取公共属性
+
+     ```java
+     Class annoationClass = Class.forName("com.live.zhf.learn.AnnoationTest");
+     Field[] fields = annoationClass.getFields();
+     ```
+
+   - 获取私有属性
+
+     
