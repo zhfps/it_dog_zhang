@@ -281,4 +281,45 @@ public class TestUtil {
 
    - 获取私有属性
 
+     ```java
+     Class annoationClass = Class.forName("com.live.zhf.learn.AnnoationTest");
+     Field[] fields = annoationClass.getDeclaredFields();
+     ```
+
+5. 通过反射获取方法
+
+   ```java
+   Method[] methods =annoationClass.getDeclaredMethods();
+   ```
+
+#### I/O
+
+![](.\image\io.png)
+
+
+
+1. 探究common.io
+
+   - 文件的读取
+
+     ```java
+     public static void readerFile(String path){
+         File file = new File(path);
+         String encoding = "UTF-8";
      
+         // 01.把文件的所有内容放到String里,第二个参数是编码可选的..
+         System.out.println("-------------把文件的所有内容读到String中---------");
+         try {
+             String content = FileUtils.readFileToString(file, encoding);
+             System.out.println(content);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
+     ```
+
+   - 文件写入
+
+     
+
+  
