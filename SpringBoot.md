@@ -280,3 +280,133 @@ Profile
   application.setBannerMode(Banner.Mode.OFF);
   application.run(args);
   ```
+
+#### 3.整合MyBatis
+
+pom：
+
+```xml
+<!-- SpringBoot集成mybatis框架 -->
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>1.3.2</version>
+</dependency>
+<!-- Mysql驱动包 -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+properties:
+
+```properties
+# 数据库配置
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/yunxi?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+spring.datasource.username = root
+spring.datasource.password = password
+#mybatis
+mybatis.config-location=classpath:mybatis/mybatis-config.xml
+mybatis.mapper-locations=classpath:mapper/**/*.xml
+```
+
+mybatis-config.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+</configuration>
+```
+
+#### 4.整合MyBatis分页
+
+Pom:
+
+```xml
+<!-- 分页-->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.13</version>
+</dependency>
+```
+
+接口：
+
+```java
+public Result<PageInfo> getUserAll(Integer currentPage, Integer pageSize) {
+    PageHelper.startPage(currentPage, pageSize);
+    List<SysUser> users = this.sysUserService.queryAll();
+    PageInfo pageInfo = new PageInfo(users);
+    Result<PageInfo> result = this.resultBuilder.success(pageInfo, ResultCode.SUCCESS);
+    return result;
+}
+```
+
+#### 5.整合阿里数据数据库连接池
+
+[参考地址](https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter)
+
+```xml
+<!--数据库连接池-->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.21</version>
+</dependency>
+```
+```properties
+###########################application.properties#############################
+# 连接数据库的相关属性
+spring.datasource.url =
+spring.datasource.username =
+spring.datasource.password =
+# 非必填可根据 url 推断
+spring.datasource.driver-class-name =
+
+# 初始化连接的数量
+spring.datasource.initial-size = 
+# 数据库连接的最大数量
+spring.datasource.max-active = 
+# 最小连接数
+spring.datasource.min-idle = 
+# 获取连接的最大等待时间
+spring.datasource.max-wait = 
+# 是否缓存预编译语句，对支持游标的数据库性能提升巨大
+spring.datasource.pool-prepared-statements = 
+# 最大缓存预编译语句的数量大小，当大于 0 时，pool-prepared-statements 自动触发修改为 true
+spring.datasource.max-pool-prepared-statement-per-connection-size = 
+# spring.datasource.max-open-prepared-statements = # 等价于上面的 max-pool-prepared-statement-per-connection-size
+# 检测连接是否有效的 SQL 语句，一般为查询语句
+spring.datasource.validation-query = select 1 from dual
+# 检测连接是否有效语句执行超时
+spring.datasource.validation-query-timeout = 
+# 获取连接时检测连接是否有效
+spring.datasource.test-on-borrow = 
+# 返回连接时检测连接是否有效
+spring.datasource.test-on-return = 
+# 对空闲连接进行检测，如果空闲时间大于 time-between-eviction-runs-millis 检测连接是否有效
+spring.datasource.test-while-idle = 
+# 检测空闲连接是否有效的时间间隔
+spring.datasource.time-between-eviction-runs-millis = 
+# 连接的最小生存时间
+spring.datasource.min-evictable-idle-time-millis = 
+# 是否支持异步关闭连接
+spring.datasource.async-close-connection-enable = 
+# 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+spring.datasource.filters = config,stat,wall,log4j
+# 通过 connectProperties 属性来打开 mergeSql（sql参数化合并） 功能；慢 sql 记录以及密码加密实现
+spring.datasource.connectionProperties = druid.stat.mergeSql = true;druid.stat.slowSqlMillis = 5000;config.decrypt = true;config.decrypt.key  = 
+
+```
+
+#### 6.整合jwt
