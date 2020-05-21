@@ -410,3 +410,353 @@ spring.datasource.connectionProperties = druid.stat.mergeSql = true;druid.stat.s
 ```
 
 #### 6.整合jwt
+
+```xml
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.10.2</version>
+</dependency>
+```
+
+```java
+package com.live.zhf.config;
+import com.live.zhf.exception.SysException;
+import io.jsonwebtoken.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+import javax.naming.AuthenticationException;
+import java.util.Date;
+
+/**
+ * JWT的token，区分大小写
+ */
+@ConfigurationProperties(prefix = "config.jwt")
+@Component
+public class JwtConfig {
+    private String secret;
+    private long expire;
+    private String header;
+
+    /**
+     * 生成token
+     * @param subject
+     * @return
+     */
+    public String createToken (String subject){
+        Date nowDate = new Date();
+        Date expireDate = new Date(nowDate.getTime() + expire * 1000);//过期时间
+
+        return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setSubject(subject)
+                .setIssuedAt(nowDate)
+                .setExpiration(expireDate)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+    /**
+     * 获取token中注册信息
+     * @param token
+     * @return
+     */
+    public Claims getTokenClaim (String token) throws ExpiredJwtException,UnsupportedJwtException,MalformedJwtException,SignatureException,IllegalArgumentException,SysException  {
+        try {
+            Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            return claims;
+        }catch (ExpiredJwtException e){
+            throw new ExpiredJwtException(null, null, e.getMessage());
+        }catch (UnsupportedJwtException e){
+            throw new UnsupportedJwtException(e.getMessage());
+        }catch (MalformedJwtException e){
+            throw new MalformedJwtException(e.getMessage());
+        }catch (SignatureException e){
+           throw new SignatureException(e.getMessage());
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
+        }catch (Exception e){
+            throw new SysException(e.getMessage());
+        }
+    }
+    /**
+     * 验证token是否过期失效
+     * @param expirationTime
+     * @return
+     */
+    public boolean isTokenExpired (Date expirationTime) {
+        return expirationTime.before(new Date());
+    }
+
+    /**
+     * 获取token失效时间
+     * @param token
+     * @return
+     */
+    public Date getExpirationDateFromToken(String token) throws ExpiredJwtException,UnsupportedJwtException,MalformedJwtException,SignatureException,IllegalArgumentException,SysException  {
+        return getTokenClaim(token).getExpiration();
+    }
+    /**
+     * 获取用户名从token中
+     */
+    public String getSubject(String token) throws ExpiredJwtException,UnsupportedJwtException,MalformedJwtException,SignatureException,IllegalArgumentException,SysException  {
+            return getTokenClaim(token).getSubject();
+    }
+
+    /**
+     * 获取jwt发布时间
+     */
+    public Date getIssuedAtDateFromToken(String token) throws ExpiredJwtException,UnsupportedJwtException,MalformedJwtException,SignatureException,IllegalArgumentException,SysException  {
+        return getTokenClaim(token).getIssuedAt();
+    }
+
+    // --------------------- getter & setter ---------------------
+
+    public String getSecret() {
+        return secret;
+    }
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+    public long getExpire() {
+        return expire;
+    }
+    public void setExpire(long expire) {
+        this.expire = expire;
+    }
+    public String getHeader() {
+        return header;
+    }
+    public void setHeader(String header) {
+        this.header = header;
+    }
+}
+
+```
+
+```java
+package com.live.zhf.exception;
+
+import com.live.zhf.utils.Result;
+import com.live.zhf.utils.ResultBuilder;
+import com.live.zhf.utils.ResultCode;
+import io.jsonwebtoken.SignatureException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.naming.AuthenticationException;
+
+@ControllerAdvice
+@ResponseBody
+@Slf4j
+public class ExceptionHandlers {
+    @ExceptionHandler(value = { SignatureException.class })
+    @ResponseBody
+    public Result<String> handlerSignatureException(SignatureException e){
+        log.error(e.getMessage());
+        Result<String> result= ResultBuilder.error(e.getMessage(), ResultCode.PERMISSION_TOKEN_ERROE);
+        return result;
+    }
+    @ExceptionHandler(value = { Exception.class })
+    @ResponseBody
+    public Result<String> handlerException(Exception e){
+        System.out.println(e.getMessage());
+        log.error(e.getMessage());
+        Result<String> result= ResultBuilder.error(e.getMessage(), ResultCode.PERMISSION_TOKEN_ERROE);
+        return result;
+    }
+    @ExceptionHandler(value = { AuthenticationException.class })
+    @ResponseBody
+    public Result<String> handlerAuthorizationException(AuthenticationException e){
+        System.out.println(e.getMessage());
+        log.error(e.getMessage());
+        Result<String> result= ResultBuilder.error(e.getMessage(), ResultCode.PERMISSION_TOKEN_ERROE);
+        return result;
+    }
+    @ExceptionHandler(value = { SysException.class })
+    @ResponseBody
+    public Result<String> handlerSysException(SysException e){
+        log.error(e.getMessage());
+        Result<String> result= ResultBuilder.error(e.getMessage(), ResultCode.PERMISSION_TOKEN_ERROE);
+        return result;
+    }
+}
+```
+
+#### 7.整合security
+
+#### 8.整合swagger
+
+```xml
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+@Api：用于类上，说明该类的作用。可以标记一个Controller类做为swagger 文档资源
+@Api(value = "xxx", description = "xxx")
+     value    url的路径值
+     tags    如果设置这个值、value的值会被覆盖
+     description    对api资源的描述
+     basePath    基本路径可以不配置
+     position    如果配置多个Api 想改变显示的顺序位置
+     produces    For example, "application/json, application/xml"
+     consumes    For example, "application/json, application/xml"
+     protocols    Possible values: http, https, ws, wss.
+     authorizations    高级特性认证时配置
+     hidden    配置为true 将在文档中隐藏
+
+
+@ApiOperation：用于方法上，说明方法的作用，每一个url资源的定义
+@ApiOperation(value = "xxx",httpMethod="POST", notes= "xxx",response=String.class)
+     value    url的路径值
+     tags    如果设置这个值、value的值会被覆盖
+     notes    对api资源的描述
+     position    如果配置多个Api 想改变显示的顺序位置
+     produces    For example, "application/json, application/xml"
+     consumes    For example, "application/json, application/xml"
+     protocols    Possible values: http, https, ws, wss.
+     authorizations    高级特性认证时配置
+     hidden    配置为true 将在文档中隐藏
+     response    返回的对象
+     responseContainer    这些对象是有效的 "List", "Set" or "Map".，其他无效
+     httpMethod    "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH"
+     code    http的状态码 默认 200
+     extensions    扩展属性
+
+
+@ApiParam：用于方法、参数、字段上，请求属性
+public ResponseEntity<User> createUser(@RequestBody @ApiParam(value = "Created user object", required = true)  User user)
+     name    属性名称
+     value    属性值
+     defaultValue    默认属性值
+     allowableValues    可以不配置
+     required    是否属性必填
+     access     
+     allowMultiple    默认为false
+     hidden    隐藏该属性
+     example    示例
+
+
+@ApiResponse：用于方法上，响应配置
+@ApiResponse(code = 400, message = "Invalid user supplied")
+     code    http的状态码
+     message    描述
+     response    默认响应类 Void
+     reference    参考ApiOperation中配置
+     responseHeaders    参考 ResponseHeader 属性配置说明
+     responseContainer    参考ApiOperation中配置
+
+
+@ApiResponses：用于方法上，响应集配置
+ @ApiResponses({ @ApiResponse(code = 400, message = "Invalid Order") })
+     value    多个ApiResponse配置
+
+
+@ResponseHeader    ：用于方法上，响应头设置
+@ResponseHeader(name="head1",description="response head conf")
+     name    响应头名称
+     description    头描述
+     response    默认响应类 Void
+     responseContainer    参考ApiOperation中配置
+
+
+@ApiImplicitParams    用于方法上，包含一组参数说明
+
+
+@ApiImplicitParam    用于方法上，用在@ApiImplicitParams注解中，指定一个请求参数的各个方面
+     paramType    参数放在哪个地方
+     name    参数代表的含义
+     value    参数名称
+     dataType    参数类型，有String/int，无用
+     required     是否必要
+     defaultValue    参数的默认值
+
+
+@ApiModel    用于类上，描述一个Model的信息（这种一般用在post创建的时候，使用@RequestBody这样的场景，请求参数无法使用@ApiImplicitParam注解进行描述的时候
+
+
+@ApiModelProperty    用于方法、字段上，描述一个model的属性
+
+
+@ApiIgnore    用于类，属性，方法上，忽略某项api,使用@ApiIgnore
+```
+
+swaggerConfig:
+
+```java
+package com.live.zhf.config;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Collections;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket webApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .groupName("接口文档")//1-端口所属模块
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.live.zhf"))//扫描当前package下的controller
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//扫描类上标有@Api的controller类
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+
+    /*** 获取 API 信息 方法 ***/
+    private ApiInfo apiInfo() {
+        // 作者 名称 连接地址 邮箱 是 固定写法
+        Contact contact = new Contact("it_dog_zhang", null, null);
+        // 返回一个 构造对象
+        return new ApiInfoBuilder()
+                .title("live-java项目模版")
+                .description("项目接口api文档")
+                .contact(contact)
+                .version("1.0")
+                .build();
+    }
+
+}
+```
+
+示例：
+
+```java
+@ApiOperation(value = "修改菜单")
+@PostMapping("updateMenu")
+@ResponseBody
+public Result<SysMenu> updateMenu(
+        @ApiParam(name = "menu",value = "菜单",required = true)
+        @RequestParam(name = "menu",required = true)
+                SysMenu menu
+       ) throws UpdateException {
+    return sysMenuService.update(menu);
+}
+```
