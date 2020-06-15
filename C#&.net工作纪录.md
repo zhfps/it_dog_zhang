@@ -54,3 +54,32 @@ SELECT * FROM TCL_ODF_BOMLIST
 							ARBPL = 'HLSKD' OR
 							ARBPL = 'ALSUB'
 						)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /// <summary>
+        /// 获取产线的工站数量
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <returns></returns>
+        public int getLineStationNumber(int lineId)
+        {
+            var list = _dbContext.FAC_LINE_STATION.AsNoTracking().Where(x => x.ADM_LINE_ID == lineId).Distinct().ToList();
+            if(list == null)
+            {
+                throw new UserFriendlyException("工站数据有误请维护");
+            }
+            return list.Count();
+        }
