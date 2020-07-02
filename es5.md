@@ -340,5 +340,12 @@
      }) // 
      ```
 
+     # 工作中用到的es6 语法
+     
      
 
+1.  数组的filter
+
+   const  arr = []
+
+   arr.filter(item =>{过滤条件})
