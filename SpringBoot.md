@@ -786,3 +786,8 @@ bean上的注解
 | @NotEmpty                 | 验证注解的元素值不为null且不为空（字符串长度不为0、集合大小不为0） |
 | @NotBlank                 | 验证注解的元素值不为空（不为null、去除首位空格后长度为0），不同于@NotEmpty，@NotBlank只应用于字符串且在比较时会去除字符串的空格 |
 | @Email                    | 验证注解的元素值是Email，也可以通过正则表达式和flag指定自定义的email格式 |
+
+## Logback
+
+1. 网站： http://logback.qos.ch/
+
