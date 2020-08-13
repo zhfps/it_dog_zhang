@@ -69,3 +69,65 @@
 ​             清理dist/
 
 ​				安装：npm install clean-webpack-plugin --save-dev
+
+
+
+  依赖清单：mini-css-extract-plugin
+
+  babel:es代码转换
+
+  
+
+
+
+expose-loader
+
+1. 配置 webpack.config.js
+
+   - entry: 入口
+
+   - mode: 模式/dev/prod
+
+   - output：
+
+     {
+
+     ​	filename:  //打包后的文件名
+
+     ​	path: 打包后的路径
+
+     }
+
+   - devServer:
+
+     {
+
+       port:
+
+       contentBase:
+
+     }
+
+   - plugin: //插件
+
+     [
+
+     ]
+
+   - module: //模块
+
+     {
+
+     rules:[
+
+     ]
+
+     }
+
+2. 配置packag.json
+
+   script:{
+
+    build: "webpack"
+
+   }

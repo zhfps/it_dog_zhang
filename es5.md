@@ -77,13 +77,13 @@
   6. 原型
 
      [[Prototype]]
-   
+
      原型链总是匹配最底层的正确匹配结果
+
      
-     
-     
+
      Object.Create():方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
-     
+
      ```js
      //es6
      let a ={
@@ -97,19 +97,294 @@
      Object.setPrototypeOf(a,b)
      console.log(a)
      ```
-     
-     ![image-20200803191026106](D:\project\it_dog_zhang\image\20200803191026106.png)
-     
-     《你不知道的JavaScript（中卷）》
-     
+
+     ![image-20200803191026106](.\image\20200803191026106.png)
+
+     《你不知道的JavaScript（中卷）》太过枯燥 放弃
+
      1.  浮点数
-     
+
         ```js
         var b = 0.1 + 0.2
         console.log(b) //0.30000000000000004
         ```
+      《你不知道的JavaScript（下卷）》太过枯燥 放弃
+
+      《JavaScript语言精髓与编程实践》
+
+     1. 学习网站：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
+
+        - JavaScript基础
+        
+          一个闭包，就是 一个函数 与其 被创建时所带有的作用域对象 的组合。闭包允许你保存状态——所以，它们可以用来代替对象。
+        
+          ```js
+          function makeAdder(a) {
+              return function(b) {
+                  return a + b;
+              }
+          }
+          var add5 = makeAdder(5); // add5 = function(b){return 5+b}
+          var add20 = makeAdder(20);// add5 = function(b){return 20+b}
+          add5(6); //11
+          add20(7); // 27
+          ```
+        
+        - 基于原型链的继承
+          1. 继承属性
+        
+           ```js
+             function f() {
+                 this.name = 'A'
+             }
+             var F = new f()
+             
+             console.log(F)
+             
+             f.prototype.type = "obj"
+             
+             console.log(F)
+           ```
+        
+             ![image-20200804230421313](.\image\20200804230421313.png)
+        
+        2.  继承方法
+        
+           ```js
+               var A ={
+                   name: 'A',
+                   method: function (str) {
+                       return this.name + str
+                   }
+               }
+           
+               var a = Object.create(A)
+           
+               console.log(a.method("a")) //Aa
+           ```
+
+            ```js
+            var A ={
+                   name: 'A',
+                   method: function (str) {
+                       return this.name + str
+                   }
+               }
+               var a ={}
+               a.__proto__ = A
+               console.log(a.method('a'))//Aa
+           	console.log(a.name) //A
+            ```
+        
+      3. es6 Class实现继承
+             
+                 ```js
+                    class A {
+                        constructor(name) {
+                            this.name = name
+                        }
+                    }
+                    
+                    class B extends A{
+                        constructor(name) {
+                            super(name);
+                        }
+                    }
+                    console.log(new B("B")) //B
+                 ```
+            
+     3. 严格模式
+
+           - 开起严格模式
+
+           ```js
+           "use strict";
+           ```
+
+           - 方法内开启严格模式
+
+     4. 内存管理
+
+     《ESMAScript6 入门 》
+
+     1. let const & vad
+
+        - 块级作用域
+
+          ```js
+          for (var j = 0; j < 10; j++) {
+          
+          }
+          console.log(j) //10
+          
+          for (let i = 0; i < 10; i++) {
+          
+          }
+          console.log(i)// i is not definde
+          ```
+
+        - 顶层对象
+
+          ```js
+          var a= 2
+          console.log(window.a)//2
+          
+          let b=2
+          console.log(window.b) //undefined
+          ```
+
+     2. 结构赋值
+
+        - 解构不仅可以用于数组，还可以用于对象。
+
+          ```javascript
+          let { foo, bar } = { foo: 'aaa', bar: 'bbb' };
+          ```
+
+     3. 字符串扩展
+
+     4. 字符串新增方法
+
+        - fromCodePoint()
+        - raw()
+        - repeat()
+        - padStart()
+        - padEnd()
+        - trimStart()
+        - trimEnd()
+        
+     5. 正则表达式扩展
+
+     - RegExp
+
+     6. 数值扩展
+
+        - 二进制和八进制
+
+     7. 函数扩展
+
+        - 允许设定默认值
+        - rest参数
+
+     8. 数组扩展
+
+     9. 对象扩展
+
+     10. Symbol
+
+     11. Set和Map
+
+     12. Proxy
+
+         ```js
+         const handler = {
+             get: function (target,attribute) {
+                 console.log(target,attribute)
+                 return attribute in target ? target[attribute]:undefined
+             },
+             set:function (target,attribute,value) {
+                 console.log(target,attribute,value)
+                 if(attribute in target){
+                     target[attribute] = value
+                 }
+             }
+         }
+         
+         let obj = {
+             name: "lishi",
+             age: 25
+         }
+         
+         let person = new Proxy(obj,handler)
+         
+         person.name
+         person.age = 23
+         
+         console.log(person)
+         ```
      
-     2. 
+     13. Reflect
+     
+     14. Iterator 和 for..of
+     
+     15. Generator(*)
+     
+     16. Class
+     
+         ```js
+         class Person{
+             constructor(name,age) {
+                 console.log(this)
+                 this.name = name
+                 this.age = age
+             }
+         }
+         console.log(Person)
+         let person = new Person()
+         console.log(person)
+         person.name = "LiSi"
+         person.age = 25
+         console.log(person)
+         //[Function: Person]
+         //Person {}
+         //Person { name: undefined, age: undefined }
+         //Person { name: 'LiSi', age: 25 }
+         
+         
+         function Person(name,age){
+             console.log(this)
+             this.name = name
+             this.age = age
+         }
+         console.log(Person)
+         let person = new Person()
+         console.log(person)
+         person.name = "LiSi"
+         person.age = 25
+         console.log(person)
+         
+         //[Function: Person]
+         //Person {}
+         //Person { name: undefined, age: undefined }
+         //Person { name: 'LiSi', age: 25 }
+         ```
+     
+     17. Class继承
+     
+         ```js
+         class Person{
+             constructor(name,age) {
+                 this.name = name
+                 this.age = age
+             }
+             static getName(){
+                 return "xx"
+             }
+             getAge(){
+                 return 24
+             }
+         }
+         class Student extends Person{
+             constructor(number,name,age) {
+                 super(name,age)
+             }
+         }
+         const student = new Student(34,'lisi',34)
+         console.log(student.getAge())
+         ```
+     
+     18. Module
+     
+         export
+     
+         import
+     
+     19. 装饰器
+     
+           
+     
+         
+
 
 
 
