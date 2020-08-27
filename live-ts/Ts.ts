@@ -1,18 +1,22 @@
-class Dog {
-  // public _name: string
-  constructor(public _name: string) {
-    console.log('constructor')
-    this._name = _name
+import superAgent from 'superagent'
+import cheerio from 'cheerio'
+class Reptiles {
+  private url = 'https://www.jdlingyu.com/'
+  private content: string = ''
+  constructor() {
+    this.getHtml()
   }
-  get name() {
-    console.log('get')
-    return this._name
-  }
-  set name(name: string) {
-    console.log('set')
-    this._name = name
+  async getHtml() {
+    const res = await superAgent.get(this.url)
+    const $ = cheerio.load(res.text)
+    const imgs = $('img')
+    const urls = []
+    imgs.map((item) => {
+      console.log(imgs[item].attribs.src)
+      urls.push(imgs[item].attribs.src)
+    })
+    this.content = res.text
   }
 }
 
-const taidi = new Dog('泰迪')
-console.log(taidi._name)
+new Reptiles()
