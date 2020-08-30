@@ -1,37 +1,45 @@
 # Ts 再次学习
 
-* 环境准备
-* 类型注解 类型推断
+- 环境准备
+- 类型注解 类型推断
 
-``` javascript
+```javascript
 let count: number
 
 let num = 123 //num:number
 ```
 
-* 函数相关类型
+- 函数相关类型
 
-  + 函数的返回值
+  - 函数的返回值
 
-``` javascript
+```javascript
 function add(x: number, y: number): number {
-    return x + y
+  return x + y
 }
 ```
 
-* never 和 void 关键字
+- never 和 void 关键字
 
-* 基础类型
-  + boolean
-  + number
-  + string
-  + void
-  + undefinde
-  + symbol
-  + null
-* 数组
+- 基础类型
+  - boolean
+  - number
+  - string
+  - void
+  - undefinde
+  - symbol
+  - null
+- 类型别名(type)
+  ```typescript
+  type STIRNG = string
+  function Say(content: STIRNG) {
+    console.log(content)
+  }
+  Say('hello type')
+  ```
+- 数组
 
-``` typescript
+```typescript
 //
 let arr: (number | string)[]
 //
@@ -40,15 +48,15 @@ let arr: string[]
 let arr: { x: number; y: string }[]
 ```
 
-* 元组
+- 元组
 
-``` typescript
+```typescript
 let obj: [string, string, number] = ['A', 'B', 12]
 ```
 
-* interface 接口
+- interface 接口
 
-``` typescript
+```typescript
 interface Person {
   name: string
   age?: number
@@ -61,27 +69,25 @@ interface functionName {
 }
 ```
 
-* class 类 (super)
+- class 类 (super)
 
-  
-
-``` typescript
-  class person {
-    name: string
-    constructor(name: string) {
-      this.name = name
-    }
-    getName() {
-      return this.name
-    }
+```typescript
+class person {
+  name: string
+  constructor(name: string) {
+    this.name = name
   }
-  ```
+  getName() {
+    return this.name
+  }
+}
+```
 
-* 访问类型 public protected private
+- 访问类型 public protected private
 
-* class 类属性的两种写法
+- class 类属性的两种写法
 
-``` typescript
+```typescript
 class obj {
   public name: string
   constructor(name: string) {
@@ -94,26 +100,24 @@ class obj {
 }
 ```
 
-* getter 和 setter
-* static
+- getter 和 setter
+- static
 
-  
-
-``` typescript
-  class Dog {
-    constructor(public name: string) {
-      this.name = name
-    }
-    static tack(): string {
-      return '咬你哦'
-    }
+```typescript
+class Dog {
+  constructor(public name: string) {
+    this.name = name
   }
-  console.log(Dog.tack())
-  ```
+  static tack(): string {
+    return '咬你哦'
+  }
+}
+console.log(Dog.tack())
+```
 
-* 抽象类
+- 抽象类
 
-``` typescript
+```typescript
 abstract class Dog {
   constructor(public name: string) {
     this.name = name
@@ -134,10 +138,10 @@ class Tidi extends Dog {
 const obj = new Tidi('tidi')
 ```
 
-* 爬虫
-  + superagent
+- 爬虫
+  - superagent
 
-``` typescript
+```typescript
 import superAgent from 'superagent'
 class Reptiles {
   private url = 'https://www.jdlingyu.com/'
@@ -154,9 +158,9 @@ class Reptiles {
 new Reptiles()
 ```
 
-* cherrio
+- cherrio
 
-``` typescript
+```typescript
 import superAgent from 'superagent'
 import cheerio from 'cheerio'
 class Reptiles {
@@ -181,11 +185,9 @@ class Reptiles {
 new Reptiles()
 ```
 
-* 配置文件 tsconfig.json
+- 配置文件 tsconfig.json
 
-    
-
-``` typescript
+```typescript
 
     {
 
@@ -267,28 +269,54 @@ new Reptiles()
 }
 ```
 
-* 联合类型和类型保护
-    - 联合类型 
+- 联合类型和类型保护
 
-    - 类型保护
+  - 联合类型
 
-* 枚举
+  - 类型保护
 
-``` typescript
-  enum Enum {
+- 枚举
+
+```typescript
+enum Enum {
   A,
   B,
   C,
 }
 
 console.log(Enum.A) //0
-console.log(Enum[0])//A
-console.log(Enum['A'])//0
+console.log(Enum[0]) //A
+console.log(Enum['A']) //0
 ```
 
-* 泛型
-* 命名空间
-* import
-* Parcel
-* 类型定义
-* keyof
+- 泛型
+
+```typescript
+//在方法中使用
+function doSomething<T>(name: T): T {
+  return name
+}
+//在类中使用
+class Obj<T> {
+  name: T
+  constructor(name: T) {
+    this.name = name
+  }
+}
+
+const obj = new Obj<String>('Obj')
+```
+
+- 命名空间
+
+  - namespace
+
+  - /// <reference path="anonymous.ts" />
+
+- import
+- Parcel
+- 类型定义
+
+- keyof
+
+- Express

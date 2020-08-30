@@ -1,9 +1,11 @@
-enum Enum {
-  A,
-  B,
-  C,
+type STIRNG = string
+
+function* Say(content: STIRNG) {
+  yield console.log(content)
+  yield console.log(content)
+  yield console.log(content)
 }
 
-console.log(Enum.A)
-console.log(Enum[0])
-console.log(Enum['A'])
+Say('hello type').next()
+Say('hello type').next()
+Say('hello type').next()
