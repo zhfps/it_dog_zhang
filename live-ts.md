@@ -1,117 +1,149 @@
-# TypeScript学习记录
-
-https://create-react-app.dev/docs/adding-typescripts/s
-
-##### 1.创建项目：
-
-yarn create react-app live-react-ts --template typescript
-
-##### 2.覆盖配置：
-
-https://gitee.com/dyb881/react-ts.git
-
-##### 3.url-loader
+# TypeScript 学习记录
 
 
+1. 安装 ts
 
-1. 安装ts
+   ​ npm install typescrip
 
-   ​    npm install typescrip
-
-2. tsc --init
+2. 初始化项目： tsc --init
 
 3. 数据类型
 
-   - 布尔类型
-
-     const bool:boolean = true
-
-   - 数字类型number
-
-   - 字符串类型string
-
-   - 数组类型Arry
-
+   - 布尔类型 (boolean)
+    ```typescript
+       const bool:boolean = true
+    ```
+   - 数字类型 number
+    ```typescript
+       const height:number = 10
+     ```
+   - 字符串类型 string (个人习惯用 "'")
+    ```typescript
+      const name:string = 'name'
+    ```
+   - 数组类型 Arry
+    ```typescript 
+     // 常用定义方式   
      let arr:number[] =[]
-
+     // 另一种定义方式
      let arr:Array<number> = []
+    ```
 
-     用接口表示数组
+  - 用接口表示数组
 
      ```ts
-    interface NumberArray {
-         [index: number]: number;
-    }
-     let fibonacci: NumberArray = [1, 1, 2, 3, 5];
+     interface NumberArray {
+       [index: number]: number
+     }
+     let fibonacci: NumberArray = [1, 1, 2, 3, 5]
      ```
-   
+
    - 元组
-   
+    ```typescript
      let tom: [string, number] = ['Tom', 25];
-   
+    ```
    - 枚举
-   
-      enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
-   
+    ```typescript
+     enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+    ```
    - 任意类型 any
-   
+
    - void 和 null
-   
-      声明一个 `void` 类型的变量没有什么用，因为你只能将它赋值为 `undefined` 和 `null`：
-   
-   
-      let unusable: void = undefined;
 
-      在 TypeScript 中，可以使用 `null` 和 `undefined` 来定义这两个原始数据类型：     
- ```ts
-      let u: undefined = undefined;
-      let n: null = null;
- ```
+     声明一个 `void` 类型的变量没有什么用，因为你只能将它赋值为 `undefined` 和 `null`：
+     ```typescript
+     let unusable: void = undefined;
+      ```
+     在 TypeScript 中，可以使用 `null` 和 `undefined` 来定义这两个原始数据类型：
 
-与 `void` 的区别是，`undefined` 和 `null` 是所有类型的子类型。也就是说 `undefined` 类型的变量，可以赋值给 `number` 类型的变量：
+      ```typescript
+      let u: undefined = undefined
+      let n: null = null
+      ```
 
-
-      // 这样不会报错
+      与 `void` 的区别是，`undefined` 和 `null` 是所有类型的子类型。也就是说 `undefined` 类型的变量，可以赋值给 `number` 类型的变量：
+       ```typescript
+      // 这样不会报错     
       let num: number = undefined;
       // 这样也不会报错
       let u: undefined;
       let num: number = u;
-       
+
       而 `void` 类型的变量不能赋值给 `number` 类型的变量：
       let u: void;
       let num: number = u;
-      
+
       // Type 'void' is not assignable to type 'number'.
-
-
-   - 类型别名
-   
-   - 联合类型
-   
-      联合类型（Union Types）表示取值可以为多种类型中的一种。
-   
-      ```ts
-      let myFavoriteNumber: string | number;
-      myFavoriteNumber = 'seven';
-      myFavoriteNumber = 7;
       ```
-   
-   - 其它
-   
-      变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型
+      （注：javascript基本类型：
+      * undefined
+      * null
+      * string
+      * boolean
+      * number
+      * symbol(ES6)          
+      * Object(引用类型) 
+       ）
+    （注：java的基本数据类型：
+      *  整型：byte, short, int, long
 
-4. 接口
+      * 字符型：char
+
+      * 浮点型：float, double
+
+      * 布尔型：boolean
+     ）
+- 类型别名
+  ```typescript
+    type Nu = number
+  ```
+
+- 联合类型
+
+  联合类型，表示取值可以为多种类型中的一种。
+
+  ```typescript
+    let myFavoriteNumber: string | number
+    myFavoriteNumber = 'seven'
+    myFavoriteNumber = 7
+  ```
+
+- 其它
+
+  变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型
+
+* 函数
+    * 具名函数
+    ```typescript
+     function get(name:string):string{
+       return name
+     }
+    ```
+    * 匿名函数
+    ```typescript
+     const get= function(name:string):string{
+       return name
+     }
+     //箭头函数
+     const get = (name:string):string =>{
+       return name
+     }
+    ```
+   
+
+
+* 接口
 
    ```ts
    interface Person {
-       name: string;
-       age: number;
+     name: string
+     age: number
    }
-   
+
    let tom: Person = {
-       name: 'Tom',
-       age: 25
-   };
+     name: 'Tom',
+     age: 25,
+   }
    ```
 
    可选属性
@@ -120,13 +152,13 @@ https://gitee.com/dyb881/react-ts.git
 
    ```ts
    interface Person {
-       name: string;
-       age?: number;
+     name: string
+     age?: number
    }
-   
+
    let tom: Person = {
-       name: 'Tom'
-   };
+     name: 'Tom',
+   }
    ```
 
    任意属性
@@ -135,15 +167,15 @@ https://gitee.com/dyb881/react-ts.git
 
    ```ts
    interface Person {
-       name: string;
-       age?: number;
-       [propName: string]: any;
+     name: string
+     age?: number
+     [propName: string]: any
    }
-   
+
    let tom: Person = {
-       name: 'Tom',
-       gender: 'male'
-   };
+     name: 'Tom',
+     gender: 'male',
+   }
    ```
 
    使用 `[propName: string]` 定义了任意属性取 `string` 类型的值。
@@ -154,16 +186,16 @@ https://gitee.com/dyb881/react-ts.git
 
    ```ts
    interface Person {
-       name: string;
-       age?: number;
-       [propName: string]: string | number;
+     name: string
+     age?: number
+     [propName: string]: string | number
    }
-   
+
    let tom: Person = {
-       name: 'Tom',
-       age: 25,
-       gender: 'male'
-   };
+     name: 'Tom',
+     age: 25,
+     gender: 'male',
+   }
    ```
 
    只读属性
@@ -172,36 +204,36 @@ https://gitee.com/dyb881/react-ts.git
 
    ```ts
    interface Person {
-       readonly id: number;
-       name: string;
-       age?: number;
-       [propName: string]: any;
+     readonly id: number
+     name: string
+     age?: number
+     [propName: string]: any
    }
-   
+
    let tom: Person = {
-       id: 89757,
-       name: 'Tom',
-       gender: 'male'
-   };
+     id: 89757,
+     name: 'Tom',
+     gender: 'male',
+   }
    ```
 
    **注意，只读的约束存在于第一次给对象赋值的时候，而不是第一次给只读属性赋值的时候**：
 
    ```ts
    interface Person {
-       readonly id: number;
-       name: string;
-       age?: number;
-       [propName: string]: any;
+     readonly id: number
+     name: string
+     age?: number
+     [propName: string]: any
    }
-   
+
    let tom: Person = {
-       name: 'Tom',
-       gender: 'male'
-   };
-   
-   tom.id = 89757;
-   
+     name: 'Tom',
+     gender: 'male',
+   }
+
+   tom.id = 89757
+
    // index.ts(8,5): error TS2322: Type '{ name: string; gender: string; }' is not assignable to type 'Person'.
    //   Property 'id' is missing in type '{ name: string; gender: string; }'.
    // index.ts(13,5): error TS2540: Cannot assign to 'id' because it is a constant or a read-only property.
@@ -211,7 +243,7 @@ https://gitee.com/dyb881/react-ts.git
 
    第二处是在给 `tom.id` 赋值的时候，由于它是只读属性，所以报错了。
 
-5. 函数
+1. 函数
 
    - 函数类型
 
@@ -219,22 +251,21 @@ https://gitee.com/dyb881/react-ts.git
 
      ```ts
      function sum(x: number, y: number): number {
-         return x + y;
+       return x + y
      }
      ```
 
    - 可选参数
 
-6. 类型断言 
+2. 类型断言
 
    ```ts
-   值 as 类型
-   <类型>值
+   ;(值 as 类型) < 类型 > 值
    ```
 
-7. 范型
+3. 范型
 
-8. 声明文件
+4. 声明文件
 
    - [`declare var`](https://ts.xcatliu.com/basics/declaration-files.html#declare-var) 声明全局变量
 
@@ -265,13 +296,9 @@ https://gitee.com/dyb881/react-ts.git
    - [`/// `](https://ts.xcatliu.com/basics/declaration-files.html#san-xie-xian-zhi-ling) 三斜线指令
 
      声明文件必需以 `.d.ts` 为后缀
-   
-8. 类型别名 type
-   
-10. tsconfig.json
 
-11. 封装并发布npm包
+5. 类型别名 type
+6.  tsconfig.json
 
-    
-
+7.  封装并发布 npm 包
 
