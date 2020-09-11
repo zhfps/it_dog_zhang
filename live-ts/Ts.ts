@@ -1,11 +1,8 @@
-type STIRNG = string
+let Say:(content:string) =>string
 
-function* Say(content: STIRNG) {
-  yield console.log(content)
-  yield console.log(content)
-  yield console.log(content)
-}
+   Say = (content:string):string =>{
+    return content
+  }
 
-Say('hello type').next()
-Say('hello type').next()
-Say('hello type').next()
+  console.log(Say("hello world"))
+  console.log(Say("my name is it_dog_zhang"))

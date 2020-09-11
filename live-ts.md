@@ -129,10 +129,60 @@
        return name
      }
     ```
-   
+    * 函数的使用
+        * 对比
+         ```typescript
+         //typescript中的定义
+         function Say(content:string):string{
+            return content
+          }
+
+         const say = function(content:string):string{
+            return content
+          }
+        //编译后
+          function Say(content) {
+              return content;
+          }
+          var say = function (content) {
+              return content;
+          };
+
+          （注:typescript在编译期检查类型,所以在最终javascript代码中是不带类型检查的）
+         ``` 
+         * 函数类型
+            ```typescript
+            //声明
+            let Say:(content:string) =>string
+            //实现
+            Say = (content:string):string =>{
+              return content
+            }
+            //调用
+            console.log(Say("hello world"))
+            console.log(Say("my name is it_dog_zhang"))
+
+            ```
+* 类（class)
+    ```typescript
+
+      class Obj {
+        //属性
+        name:string
+        //构造器
+        constructor(){
+
+        }
+        //方法
+        get(){
+          
+        }
+      }
+
+    ```
 
 
-* 接口
+* 接口（interface）
 
    ```ts
    interface Person {
@@ -145,6 +195,13 @@
      age: 25,
    }
    ```
+* 命名空间（namespace）
+  ```typescript
+    namespace system{
+
+    }
+
+  ```
 
    可选属性
 

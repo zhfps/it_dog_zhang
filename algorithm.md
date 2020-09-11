@@ -1,4 +1,6 @@
-##### 1.两数之和
+# 算法刷题
+
+1. 两数之和
 
 //给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 
 //
@@ -52,8 +54,7 @@ public class Solution2 {
     }
 }
 ```
-
-##### 2.设计一个算法，计算出n阶乘中尾部零的个数
+2. 设计一个算法，计算出n阶乘中尾部零的个数
 
 ```
 样例  1:
@@ -94,7 +95,7 @@ public class Solution {
 }
 ```
 
-##### 3.加法 两数之和
+3. 加法 两数之和
 
 ```java
 public class Solution {
@@ -112,10 +113,9 @@ public class Solution {
     }
 }
 ```
+4. 合并两个有序升序的整数数组A和B变成一个新的数组。新数组也要有序。
 
-##### 4.合并两个有序升序的整数数组A和B变成一个新的数组。新数组也要有序。
-
-从头开始比较两个数列中的数，哪一个小就取出依次存入新的数组中，直到其中一个全部比较完，将另一个数组剩下的部分直接存入新的数组中。
+ 从头开始比较两个数列中的数，哪一个小就取出依次存入新的数组中，直到其中一个全部比较完，将另一个数组剩下的部分直接存入新的数组中。
 
 ```java
 public class Solution {
@@ -145,7 +145,7 @@ public class Solution {
 }
 ```
 
-##### 5.给定一个字符串（以字符数组的形式给出）和一个偏移量，根据偏移量原地旋转字符串(从左向右旋转)。
+5. 给定一个字符串（以字符数组的形式给出）和一个偏移量，根据偏移量原地旋转字符串(从左向右旋转)。
 
 ```java
 public class Solution {
@@ -170,7 +170,36 @@ public class Solution {
     }
 }
 ```
+6. 反转一个只有3位数的整数。
 
+    样例
+    样例 1:
+
+    输入: number = 123
+    输出: 321
+    样例 2:
+
+    输入: number = 900
+    输出: 9
+    注意事项
+    你可以假设输入一定是一个只有三位数的整数，这个整数大于等于100，小于1000。
+    ```java
+    public class Solution {
+    /**
+     * @param number: A 3-digit number.
+     * @return: Reversed number.
+     */
+    public int reverseInteger(int number) {
+        // write your code here
+            if(number == 100){
+                return 1;
+            }else{
+                return number/100 + number%100/10*10 + number%100%10*100;
+            }
+        
+         }
+        }
+    ```
 
 
 ### 书籍阅读
@@ -193,8 +222,6 @@ public class Solution {
 4. 链表
 
    在物理上非连续、非顺序的数据结构，由若干节 点（node）所组成。
-
-   ![image-20200728125459134](D:\project\it_dog_zhang\image\arrVslink.png)
 
 5. 散列表
 
