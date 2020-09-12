@@ -1,8 +1,14 @@
-let Say:(content:string) =>string
+function Say(content:number):string;
+function Say(content:string):string;
+function Say(content:number|string):string{
+    if(typeof content === 'number'){
+      return content.toString()
+    }else if(typeof content === 'string'){
+      return content
+    }else{
+      return ""
+    }
+}
 
-   Say = (content:string):string =>{
-    return content
-  }
-
-  console.log(Say("hello world"))
-  console.log(Say("my name is it_dog_zhang"))
+console.log(Say(345))
+console.log(Say('hello'))
