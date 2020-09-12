@@ -163,6 +163,79 @@
             console.log(Say("my name is it_dog_zhang"))
 
             ```
+         * 可选参数
+            ```typescript
+              function Add(a:number,b:number,c?:number):number{
+                  if(c){
+                    return a+b+c
+                  }else{
+                    return a+b
+                  }
+                }
+                console.log(Add(5,4))
+                //9
+                (注：参数c 为可选参数，可选参数必须置于最后)
+            ```
+        * 默认参数
+         ```typescript
+         function Add(a:number,b:number,c:number = 2):number{
+              if(c){
+                return a+b+c
+              }else{
+                return a+b
+              }
+            }
+
+            console.log(Add(5,4,3)) //12
+            console.log(Add(5,4))//11
+         ``` 
+        * 剩余参数
+        ```typescript
+        //
+        function Add(...args:number[]):number{
+              let sum = 0
+              for (const iterator of args) {
+                sum += iterator
+              }
+              return sum
+            }
+
+            console.log(Add(5,4,3)) //12
+            console.log(Add(5,4)) //9
+        //编译后的js
+        function Add() {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var sum = 0;
+            for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
+                var iterator = args_1[_a];
+                sum += iterator;
+            }
+            return sum;
+        }
+        console.log(Add(5, 4, 3));
+        console.log(Add(5, 4));
+
+        ```
+      * 函数的重载
+        ```typescript
+        function Say(content:number):string; //声明
+        function Say(content:string):string; //声明
+        function Say(content:number|string):string{
+            if(typeof content === 'number'){
+              return content.toString()
+            }else if(typeof content === 'string'){
+              return content
+            }else{
+              return ""
+            }
+        }
+
+        console.log(Say(345)) //345
+        console.log(Say('hello')) //hello
+        ```
 * 类（class)
     ```typescript
 
