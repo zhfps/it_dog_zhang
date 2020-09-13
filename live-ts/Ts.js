@@ -1,13 +1,10 @@
-function Say(content) {
-    if (typeof content === 'number') {
-        return content.toString();
-    }
-    else if (typeof content === 'string') {
-        return content;
-    }
-    else {
-        return "";
-    }
+function Says(name,age){
+    console.log(name,age)
 }
-console.log(Say(345));
-console.log(Say('hello'));
+
+const name = "bind"
+const age = 23
+
+const _says = Says.bind(this,name)
+
+const says = _says(age,20)

@@ -26,15 +26,54 @@
   - call() and apply()
 
     call和apply作用是一样的，都是为了改变某个函数运行时的上下文（context）而存在的，换句话说，就是为了改变函数体内部this的指向。它们的第一个参数是一个对象，它们会把这个对象绑定到 this，接着在调用函数时指定这个 this。因为你可以直接指定 this 的绑定对象；
+    * call()
+      ```typescript
+
+       func.call([thisArg[, arg1, arg2, ...argN]])
+
+       //
+         function Says(name){
+              console.log(name)
+          }
+          const obj = "call"
+          Says.call(this,obj)
+      ```
+    * apply()
+      ```typescript
+
+        func.apply(thisArg, [ argsArray])
+
+        //
+        function Says(name){
+            console.log(name)
+        }
+        const obj = "call"
+        Says.apply(this,[obj])
+
+      ```
     
   - 默认绑定
+    ```javascript
+     let boundFunc = func.bind(thisArg[, arg1[, arg2[, ...argN]]])
 
-  - 显示绑定
+     //示列
+     function Says(name,age){
+         console.log(name,age)
+        }
 
-    1. 强制绑定（bind）
-    2. 非强制绑定（new）
+        const name = "bind"
+        const age = 23
 
-  - 隐式绑定
+        const _says = Says.bind(this,name)
+
+        const says = _says(age,20)
+    ```
+    - 显示绑定
+
+      1. 强制绑定（bind）
+      2. 非强制绑定（new）
+
+    - 隐式绑定
 
 - 对象
 

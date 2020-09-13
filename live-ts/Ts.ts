@@ -1,14 +1,5 @@
-function Say(content:number):string;
-function Say(content:string):string;
-function Say(content:number|string):string{
-    if(typeof content === 'number'){
-      return content.toString()
-    }else if(typeof content === 'string'){
-      return content
-    }else{
-      return ""
-    }
-}
+import { Main } from './Main'
 
-console.log(Say(345))
-console.log(Say('hello'))
+let obj = new Main.Obj("obj");
+
+console.log(obj)

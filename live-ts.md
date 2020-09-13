@@ -236,99 +236,104 @@
         console.log(Say(345)) //345
         console.log(Say('hello')) //hello
         ```
-* 类（class)
+* 面对对象编程
+    * 类（class)
+         ```typescript
+
+              class Obj {
+                //属性
+                name:string
+                //构造器
+                constructor(){
+
+                }
+                //方法
+                get(){
+                  
+                }
+              }
+            ```
+
+  * 接口（interface）
+
+         ```ts
+         interface Person {
+           name: string
+           age: number
+         }
+
+         let tom: Person = {
+           name: 'Tom',
+           age: 25,
+         }
+         ```
+* 命名空间（namespace）
     ```typescript
-
-      class Obj {
-        //属性
-        name:string
-        //构造器
-        constructor(){
-
-        }
-        //方法
-        get(){
-          
+      //定义
+      export namespace Main {
+        export class Obj<T> {
+          name: T
+          constructor(name: T) {
+            this.name = name
+          }
         }
       }
-
+      //引用
+      import { Main } from './Main'
+      let obj = new Main.Obj("obj");
+      console.log(obj)
     ```
 
+ * 可选属性
 
-* 接口（interface）
+   * 有时我们希望不要完全匹配一个形状，那么可以用可选属性：
 
-   ```ts
-   interface Person {
-     name: string
-     age: number
-   }
+      ```typescript
+      interface Person {
+        name: string
+        age?: number
+      }
 
-   let tom: Person = {
-     name: 'Tom',
-     age: 25,
-   }
-   ```
-* 命名空间（namespace）
-  ```typescript
-    namespace system{
+      let tom: Person = {
+        name: 'Tom',
+      }
+      ```
 
+  * 任意属性
+
+    有时候我们希望一个接口允许有任意的属性，可以使用如下方式：
+
+    ```ts
+    interface Person {
+      name: string
+      age?: number
+      [propName: string]: any
     }
 
-  ```
+    let tom: Person = {
+      name: 'Tom',
+      gender: 'male',
+    }
+    ```
+    使用 `[propName: string]` 定义了任意属性取 `string` 类型的值。
+    需要注意的是，**一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集**：
+    一个接口中只能定义一个任意属性。如果接口中有多个类型的属性，则可以在任意属性中使用联合类型：
 
-   可选属性
+      ```ts
+      interface Person {
+        name: string
+        age?: number
+        [propName: string]: string | number
+      }
 
-   有时我们希望不要完全匹配一个形状，那么可以用可选属性：
+      let tom: Person = {
+        name: 'Tom',
+        age: 25,
+        gender: 'male',
+      }
+      ```
 
-   ```ts
-   interface Person {
-     name: string
-     age?: number
-   }
-
-   let tom: Person = {
-     name: 'Tom',
-   }
-   ```
-
-   任意属性
-
-   有时候我们希望一个接口允许有任意的属性，可以使用如下方式：
-
-   ```ts
-   interface Person {
-     name: string
-     age?: number
-     [propName: string]: any
-   }
-
-   let tom: Person = {
-     name: 'Tom',
-     gender: 'male',
-   }
-   ```
-
-   使用 `[propName: string]` 定义了任意属性取 `string` 类型的值。
-
-   需要注意的是，**一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集**：
-
-   一个接口中只能定义一个任意属性。如果接口中有多个类型的属性，则可以在任意属性中使用联合类型：
-
-   ```ts
-   interface Person {
-     name: string
-     age?: number
-     [propName: string]: string | number
-   }
-
-   let tom: Person = {
-     name: 'Tom',
-     age: 25,
-     gender: 'male',
-   }
-   ```
-
-   只读属性
+* 只读属性
 
    有时候我们希望对象中的一些字段只能在创建的时候被赋值，那么可以用 `readonly` 定义只读属性：
 
