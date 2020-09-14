@@ -1,5 +1,17 @@
-import { Main } from './Main'
+function enumerable(value: string) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+     propertyKey = value
+  };
+}
+class Obj {
+  name: string;
+  constructor(name: string) {
+      this.name = name;
+  }
+  @enumerable('say')
+  Say(){
+    return "hello";
+  }
+}
 
-let obj = new Main.Obj("obj");
-
-console.log(obj)
+console.log(new Obj("world").Say());

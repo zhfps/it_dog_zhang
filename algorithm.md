@@ -234,6 +234,85 @@ public class Solution {
             }
         }
     ```
+8. 比较两个字符串A和B，确定A中是否包含B中所有的字符。字符串A和B中的字符都是 大写字母
+样例
+给出 A = "ABCD" B = "ACD"，返回 true
+给出 A = "ABCD" B = "AABC"， 返回 false
+注意事项
+在 A 中出现的 B 字符串里的字符不需要连续或者有序。
+    ```java
+        public class Solution {
+            /**
+            * @param A: A string
+            * @param B: A string
+            * @return: if string A contains all of the characters in B return true else return false
+            */
+            public boolean compareStrings(String A, String B) {
+                // write your code here
+                if(A.length()<B.length()){
+                    return  false;
+                }else {
+                    char[] arr = A.toCharArray();
+                    char[] brr = B.toCharArray();
+                    int[] crr = new int[26];
+                    int al = arr.length;
+                    int bl = brr.length;
+                    for (int i = 0; i < arr.length; i++) {
+                        int asc = (int)arr[i];
+                        crr[asc-65] +=1;
+                        if(i<bl){
+                            int bsc =(int)brr[i];
+                            crr[bsc-65] -=1;
+                        }
+                    }
+                    boolean check = true;
+                    for (int i = 0; i <26 ; i++) {
+                        if(crr[i]<0){
+                            check = false;
+                        }
+                    }
+
+                    return  check;
+                }
+            }
+        }
+    ```
+9. 子串查找 
+    对于一个给定的 source 字符串和一个 target 字符串，你应该在 source 字符串中找出 target 字符串出现的第一个位置(从0开始)。如果不存在，则返回 -1。
+    ```java
+        public class Solution {
+        /**
+        * @param source: 
+        * @param target: 
+        * @return: return the index
+        */
+        public int strStr(String source, String target) {
+            
+                    char[] arr = source.toCharArray();
+                    char[] brr = target.toCharArray();
+                    int al = arr.length;
+                    int bl = brr.length;
+                    int i = 0;
+                    int j = 0;
+                    while(i<al&&j<bl){
+                        if(arr[i] == brr[j]){
+                            i++;
+                            j++;
+                        }else {
+                            i=i-j+1;
+                            j=0;
+                        }
+        
+                    }
+                    if(j==bl){
+                        return  i-j;
+                    }else {
+                        return -1;
+                    }
+            
+        }
+    }
+    ```
 
 ### 书籍阅读
 

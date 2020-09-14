@@ -1,3 +1,9 @@
+## 问题记录
+ 1. string 转数组？
+    str.toCharArray
+
+# 学习记录
+
 ## 基础
 
 ## 集合

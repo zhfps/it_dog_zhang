@@ -378,6 +378,50 @@
 
    第二处是在给 `tom.id` 赋值的时候，由于它是只读属性，所以报错了。
 
+* 装饰器
+    * 类装饰器
+     ```javascript
+      //官网示例
+      function classDecorator<T extends {new(...args:any[]):{}}>(constructor:T) {
+          return class extends constructor {
+              newProperty = "new property";
+              hello = "override";
+          }
+        }
+
+        @classDecorator
+        class Greeter {
+          property = "property";
+          hello: string;
+          constructor(m: string) {
+              this.hello = m;
+          }
+        }
+
+        console.log(new Greeter("world"));
+     ```
+     * 方法装饰器
+         方法装饰器表达式会在运行时当作函数被调用，传入下列3个参数：
+        * 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+        * 成员的名字。
+        * 成员的属性描述符。
+     * 访问器装饰器
+       访问器装饰器表达式会在运行时当作函数被调用，传入下列3个参数：
+       * 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+       * 成员的名字。
+       * 成员的属性描述符。 
+     * 属性装饰器
+       属性装饰器表达式会在运行时当作函数被调用，传入下列2个参数：
+
+       * 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+       * 成员的名字。
+     * 参数装饰器
+        参数装饰器表达式会在运行时当作函数被调用，传入下列3个参数：
+
+        * 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+        * 成员的名字。
+        * 参数在函数参数列表中的索引。 
+
 1. 函数
 
    - 函数类型
@@ -437,3 +481,5 @@
 
 7.  封装并发布 npm 包
 
+
+  
