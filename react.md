@@ -1,30 +1,68 @@
 # React
 
-###### 虚拟节点
+* 虚拟节点(Virtual DOM)
 
-###### jsx语法
+* jsx语法
 
-```jsx
-ReactDOM.render(
-		  <h1>Hello, world!</h1>,
-		  document.getElementById('root')
-		);
-```
+  ```jsx
+  ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('root')
+      );
+  ```
 
-###### 模块
-
-   有特定功能的js文件
-
-###### 组件
+* 组件
 
   实现特定功能的代码集合
+  ```tsx
+   //创建一个简单组件
+   import React from 'react'
 
-1. ​     工厂函数组件
+    interface State{
+      count:number
+    }
 
-​			function FunctionElement(){
-​				return <h1>工厂函数组件</h1>;
-​			}
-​			ReactDOM.render(<FunctionElement/>,document.getElementById("root"));  
+    interface Prop{
+
+    }
+
+    export default class ReButton extends React.Component<Prop,State> {
+      constructor(props: any) {
+        super(props)
+        this.add = this.add.bind(this)
+        this.state = {
+          count: 0
+        }
+      }
+      
+      add(e:any){
+        e.preventDefault()
+        this.setState({
+          count: this.state.count + 1
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <button className="re-button" onClick={this.add}>测试</button>
+            <div>
+              { this.state.count}
+            </div>
+          </div>
+
+        )
+      }
+    }
+  ```
+
+* 工厂函数组件
+    ```javascript
+  	function FunctionElement(){
+      ​	return <h1>工厂函数组件</h1>;
+    	}
+      ReactDOM.render(<FunctionElement/>,document.getElementById("root"));  
+   ```
 
 1. ES6 类组件
 

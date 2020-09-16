@@ -47,7 +47,7 @@
       console.log("array has been modified", arr);
       });
       ```
-5. “use strict”的作用是什么？
+5. “use strict”的作用是什么？🐕
     use strict 出现在 JavaScript 代码的顶部或函数的顶部，可以帮助你写出更安全的 JavaScript 代码。如果你错误地创建了全局变量，它会通过抛出错误的方式来警告你。例如，以下程序将抛出错误：
     ```javascript
     function doSomething(val) {
@@ -62,12 +62,12 @@
     var x = val + 10;
     }
     ```
-7. 解释 JavaScript 中的 null 和 undefined。
+7. 解释 JavaScript 中的 null 和 undefined。🐕
     JavaScript 中有两种底层类型：null 和 undefined。它们代表了不同的含义：
     尚未初始化：undefined；
     空值：null。
     null和undefined是两个不同的对象
-8. 编写一个可以执行如下操作的函数。
+8. 编写一个可以执行如下操作的函数。🐕
     ```javascript
       var addSix = createBase(6);
       addSix(10); // 返回 16
@@ -86,7 +86,7 @@
       addSix(10);
       addSix(21);
     ```
-9.  解释 JavaScript 中的值和类型。
+9.  解释 JavaScript 中的值和类型。🐕
     JavaScript提供两种数据类型: 基本数据类型和引用数据类型
     基本数据类型有:
     ```javascript
@@ -95,7 +95,7 @@
       Boolean
       Null
       Undefined
-      Symbol
+      Symbol(es6)
     ```
     引用数据类型有:
     ```javascript
@@ -103,14 +103,14 @@
       Array
       Function
     ```
-10. 解释事件冒泡以及如何阻止它？
+10. 解释事件冒泡以及如何阻止它？🐕
   事件冒泡是指嵌套最深的元素触发一个事件，然后这个事件顺着嵌套顺序在父元素上触发。
   防止事件冒泡的一种方法是使用 event.cancelBubble 或 event.stopPropagation()（低于 IE 9）。
 
-10. JavaScript 中的 let 关键字有什么用？
+10. JavaScript 中的 let 关键字有什么用？🐕
   除了可以在函数级别声明变量之外，ES6 还允许你使用 let 关键字在代码块（{..}）中声明变量。
 
-11. 如何检查一个数字是否为整数？
+11. 如何检查一个数字是否为整数？🐕
   检查一个数字是小数还是整数，可以使用一种非常简单的方法，就是将它对 1 进行取模，看看是否有余数。
   ```javascript
       function isInt(num) {
@@ -120,7 +120,7 @@
       console.log(isInt(12.2)); // false
       console.log(isInt(0.3)); // false
   ```
-12. 什么是 IIFE（立即调用函数表达式）？
+12. 什么是 IIFE（立即调用函数表达式）？🐕
   它是立即调用函数表达式（Immediately-Invoked Function Expression），简称 IIFE。函数被创建后立即被执行：
     ```javascript
       (function IIFE(){
@@ -128,7 +128,7 @@
       })();
       // "Hello!"
     ```
-13. 如何在 JavaScript 中比较两个对象？
+13. 如何在 JavaScript 中比较两个对象？🐕
     对于两个非原始值，比如两个对象（包括函数和数组），== 和 === 比较都只是检查它们的引用是否匹配，并不会检查实际引用的内容。
     例如，默认情况下，数组将被强制转型成字符串，并使用逗号将数组的所有元素连接起来。所以，两个具有相同内容的数组进行 == 比较时不会相等
     ```javascript
@@ -140,7 +140,7 @@
       a == b; // false
     ```
 
-14. 你能解释一下 ES5 和 ES6 之间的区别吗？
+14. 你能解释一下 ES5 和 ES6 之间的区别吗？🐕
     ECMAScript 5（ES5）：ECMAScript 的第 5 版，于 2009 年标准化。这个标准已在所有现代浏览器中完全实现。
     ECMAScript 6（ES6）或 ECMAScript 2015（ES2015）：第 6 版 ECMAScript，于 2015 年标准化。这个标准已在大多数现代浏览器中部分实现。
     以下是 ES5 和 ES6 之间的一些主要区别：
@@ -207,6 +207,7 @@
         import myModule from './myModule';
       ```
 15. 解释 JavaScript 中“undefined”和“not defined”之间的区别。
+    
     在 JavaScript 中，如果你试图使用一个不存在且尚未声明的变量，JavaScript 将抛出错误“var name is not defined”，让后脚本将停止运行。但如果你使用 typeof undeclared_variable，它将返回 undefined。
     在进一步讨论之前，先让我们理解声明和定义之间的区别。
     “var x”表示一个声明，因为你没有定义它的值是什么，你只是声明它的存在。
