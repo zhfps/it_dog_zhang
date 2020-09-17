@@ -313,6 +313,68 @@ public class Solution {
         }
     }
     ```
+10. 设计一个算法找出只含因子2，3，5的第n小数？
+    ```java
+            public class Solution {
+            /**
+            * @param n: An integer
+            * @return: return a  integer as description.
+            */
+            public int nthUglyNumber(int n) {
+                // write your code here
+                int[] dp = new int[n];
+                dp[0] = 1;
+                int l2 = 0, l3 = 0, l5 = 0;
+                for(int i = 1; i < n; ++i) {
+                    // 生成第i+1小的丑数
+                    dp[i] = Math.min(Math.min(dp[l2] * 2, dp[l3] * 3), dp[l5] * 5);
+                    if (dp[i] == dp[l2] * 2) {
+                        ++l2;
+                    }
+                    if (dp[i] == dp[l3] * 3) {
+                        ++l3;
+                    } 
+                    if (dp[i] == dp[l5] * 5) {
+                        ++l5;
+                    }
+                }
+                return dp[n - 1];
+            }
+        }
+
+    ```
+11. 二分法查找？
+    ```java
+    public class Solution {
+            /**
+            * @param nums: The integer array.
+            * @param target: Target to find.
+            * @return: The first position of target. Position starts from 0.
+            */
+            public int binarySearch(int[] nums, int target) {
+                // write your code here
+                int left = 0;
+                int right = nums.length - 1;
+                int mid;
+
+                while (left < right) {
+                    //得到中间位置
+                    mid = (right + left) / 2;
+                    if (nums[mid] < target) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                if (nums[right] == target) {
+                    return right;
+                }
+
+                return -1;
+            }
+        }
+
+    ```
 
 ### 书籍阅读
 

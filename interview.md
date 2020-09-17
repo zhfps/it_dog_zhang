@@ -206,7 +206,7 @@
         export default myModule;
         import myModule from './myModule';
       ```
-15. 解释 JavaScript 中“undefined”和“not defined”之间的区别。
+15. 解释 JavaScript 中“undefined”和“not defined”之间的区别。🐕
     
     在 JavaScript 中，如果你试图使用一个不存在且尚未声明的变量，JavaScript 将抛出错误“var name is not defined”，让后脚本将停止运行。但如果你使用 typeof undeclared_variable，它将返回 undefined。
     在进一步讨论之前，先让我们理解声明和定义之间的区别。
@@ -221,7 +221,7 @@
         if(typeof x === 'undefined') // 将返回 true     
     当我们试图引用一个既未声明也未定义的变量时，将会出现 not defined 错误。
     console.log(y); // 输出: ReferenceError: y is not defined
-16. 匿名和命名函数有什么区别？
+16. 匿名和命名函数有什么区别？ 🐕
       ```javascript
       var foo = function() { // 赋给变量 foo 的匿名函数
       // ..
@@ -232,7 +232,7 @@
       foo(); // 实际执行函数
       x();
     ```
-17. Javascript 中的“闭包”是什么？举个例子？
+17. Javascript 中的“闭包”是什么？举个例子？🐕
     闭包是在另一个函数（称为父函数）中定义的函数，并且可以访问在父函数作用域中声明和定义的变量。
     闭包可以访问三个作用域中的变量：
     在自己作用域中声明的变量；
@@ -272,7 +272,7 @@
       innerFuncVar = y
       globalVar = abc
      ```
-18.  如何在 JavaScript 中创建私有变量？
+18.  如何在 JavaScript 中创建私有变量？🐕
     要在 JavaScript 中创建无法被修改的私有变量，你需要将其创建为函数中的局部变量。即使这个函数被调用，也无法在函数之外访问这个变量。例如：
       ```javascript
         function func() {
@@ -289,11 +289,11 @@
         var getPriv = func();
         console.log(getPriv()); // => secret code
       ```
-19. 请解释原型设计模式。
+19. 请解释原型设计模式。 🐕
     原型模式可用于创建新对象，但它创建的不是非初始化的对象，而是使用原型对象（或样本对象）的值进行初始化的对象。原型模式也称为属性模式。
     原型模式在初始化业务对象时非常有用，业务对象的值与数据库中的默认值相匹配。原型对象中的默认值被复制到新创建的业务对象中。
     经典的编程语言很少使用原型模式，但作为原型语言的 JavaScript 在构造新对象及其原型时使用了这个模式。
-20. “this”关键字的原理是什么？请提供一些代码示例。
+20. “this”关键字的原理是什么？🐕 请提供一些代码示例。
     在 JavaScript 中，this 是指正在执行的函数的“所有者”，或者更确切地说，指将当前函数作为方法的对象。
     ```javascript
       function foo() {
@@ -312,7 +312,7 @@
       foo.call( obj2 ); // "obj2"
       new foo(); // undefined
     ```
-21. 如何向 Array 对象添加自定义方法，让下面的代码可以运行？
+21. 如何向 Array 对象添加自定义方法，让下面的代码可以运行？🐕
     ```javascript
       var arr = [1, 2, 3, 4, 5];
       var avg = arr.average();
@@ -330,7 +330,7 @@
       var avg = arr.average();
       console.log(avg); // => 3
      ```
-22. 什么是 JavaScript 中的提升操作？
+22. 什么是 JavaScript 中的提升操作？ 🐕
     提升（hoisting）是 JavaScript 解释器将所有变量和函数声明移动到当前作用域顶部的操作。有两种类型的提升：
     变量提升——非常少见
     函数提升——常见
@@ -345,10 +345,10 @@
         }
         console.log( a ); // 2
     ```
-23. 以下代码输出的结果是什么？
+23. 以下代码输出的结果是什么？🐕
     0.1 + 0.2 === 0.3
     这段代码的输出是 false，这是由浮点数内部表示导致的。0.1 + 0.2 并不刚好等于 0.3，实际结果是 0.30000000000000004。解决这个问题的一个办法是在对小数进行算术运算时对结果进行舍入。
-24. 请描述一下 Revealing Module Pattern 设计模式。
+24. 请描述一下 Revealing Module Pattern 设计模式。 🐕
     暴露模块模式（Revealing Module Pattern）是模块模式的一个变体，目的是维护封装性并暴露在对象中返回的某些变量和方法。如下所示：
     ```javascript
       var Exposer = (function() {

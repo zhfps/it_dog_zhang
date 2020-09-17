@@ -56,6 +56,16 @@
     }
   ```
 
+* 生命周期
+  * 组件的挂载
+       componentWillMount render之前执行和componentDidMount render之后执行
+  * 组件的卸载
+       componentWillUnmount
+  * 生命周期图
+
+    ![](image/react-live.png)
+* createRef()      
+
 * 工厂函数组件
     ```javascript
   	function FunctionElement(){
