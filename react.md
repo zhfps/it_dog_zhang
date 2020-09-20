@@ -66,6 +66,70 @@
     ![](image/react-live.png)
 * createRef()      
 
+* 事件系统
+    * 合成事件的绑定方式
+    * 合成事件的实现方式
+      1. 事件委派  
+* classnames的使用
+  ```tsx
+      import React from 'react'
+      import classNames from 'classnames'
+      interface State {
+        count: number,
+        className: string
+      }
+
+      interface Prop {
+
+      }
+
+      export default class ReButton extends React.Component<Prop, State> {
+
+        constructor(props: any) {
+          super(props)
+          this.add = this.add.bind(this)
+          this.state = {
+            count: 0,
+            className: ''
+          }
+        }
+
+        add(e: any) {
+          e.preventDefault()
+
+          let className = classNames({
+            "re-button": this.state.count % 2 == 1
+          })
+          this.setState({
+            count: this.state.count + 1,
+            className: className
+          })
+        }
+
+
+
+
+        render() {
+
+          return (
+            <div>
+              <button className={this.state.className} onClick={this.add}>测试</button>
+              <div>
+                {this.state.count}
+              </div>
+            </div>
+
+          )
+        }
+      }
+  ```
+* 组件间的通信
+  * 父组件向子组件通信
+      
+      传递参数
+  * 子组件向父组件通信
+
+      事件回调
 * 工厂函数组件
     ```javascript
   	function FunctionElement(){

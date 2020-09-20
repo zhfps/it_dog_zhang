@@ -1,7 +1,8 @@
 import React from 'react'
-
+import classNames from 'classnames'
 interface State {
-  count: number
+  count: number,
+  className: string
 }
 
 interface Prop {
@@ -9,19 +10,25 @@ interface Prop {
 }
 
 export default class ReButton extends React.Component<Prop, State> {
-  myref: any
+
   constructor(props: any) {
     super(props)
     this.add = this.add.bind(this)
     this.state = {
-      count: 0
+      count: 0,
+      className: ''
     }
   }
 
   add(e: any) {
     e.preventDefault()
+
+    let className = classNames({
+      "re-button": this.state.count % 2 == 1
+    })
     this.setState({
-      count: this.state.count + 1
+      count: this.state.count + 1,
+      className: className
     })
   }
 
@@ -29,9 +36,10 @@ export default class ReButton extends React.Component<Prop, State> {
 
 
   render() {
+
     return (
       <div>
-        <button className="re-button" onClick={this.add}>测试</button>
+        <button className={this.state.className} onClick={this.add}>测试</button>
         <div>
           {this.state.count}
         </div>

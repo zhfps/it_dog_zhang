@@ -375,6 +375,66 @@ public class Solution {
         }
 
     ```
+**12. 交换数组 (入门 不提供代码)**
+
+**13. 三数的最大值(入门 不提供代码)**
+
+**14. 快速排序**
+
+  ```java
+  public class Solution {
+        /**
+        * @param A: an integer array
+        * @return: nothing
+        */
+        public void sortIntegers(int[] A) {
+            // write your code here
+            for(int i= 0; i<A.length; i++){
+                for(int j= 0;j<A.length-i-1;j++){
+                    if(A[j]>A[j+1]){
+                        int temp = A[j];
+                        A[j] = A[j+1];
+                        A[j+1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+  ```
+**15. 中位数**
+    给定一个未排序的整数数组，找到其中位数。
+    中位数是排序后数组的中间值，如果数组的个数是偶数个，则返回排序后数组的第N/2个数。
+
+```java
+    public class Solution {
+        /**
+        * @param nums: A list of integers
+        * @return: An integer denotes the middle number of the array
+        */
+        public int median(int[] nums) {
+            // write your code here
+            if(nums.length ==1){
+                return nums[0];
+            }
+            for (int i = 0; i <nums.length; i++) {
+                for (int j = 0; j <nums.length-i-1; j++) {
+                    if(nums[j]>nums[j+1]){
+                        int temp = nums[j];
+                        nums[j] = nums[j+1];
+                        nums[j+1] = temp;
+                    }
+                }
+                
+            }
+            if(nums.length%2 == 0){
+                return  nums[nums.length/2-1];
+            }else {
+                return nums[nums.length/2];
+            }
+        }
+    }
+```
 
 ### 书籍阅读
 
