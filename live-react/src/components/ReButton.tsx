@@ -10,10 +10,11 @@ interface Prop {
 }
 
 export default class ReButton extends React.Component<Prop, State> {
-
+  myRef: any
   constructor(props: any) {
     super(props)
     this.add = this.add.bind(this)
+    this.myRef = React.createRef<any>()
     this.state = {
       count: 0,
       className: ''
@@ -24,12 +25,13 @@ export default class ReButton extends React.Component<Prop, State> {
     e.preventDefault()
 
     let className = classNames({
-      "re-button": this.state.count % 2 == 1
+      "re-button": this.state.count % 2 === 1
     })
     this.setState({
       count: this.state.count + 1,
       className: className
     })
+    console.log(this.myRef)
   }
 
 
@@ -39,7 +41,7 @@ export default class ReButton extends React.Component<Prop, State> {
 
     return (
       <div>
-        <button className={this.state.className} onClick={this.add}>测试</button>
+        <button ref={this.myRef} className={this.state.className} onClick={this.add}>测试</button>
         <div>
           {this.state.count}
         </div>

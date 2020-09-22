@@ -1,5 +1,8 @@
 # React
 
+* 相关网站: 
+    * https://www.html.cn/create-react-app/docs/getting-started/
+
 * 虚拟节点(Virtual DOM)
 
 * jsx语法
@@ -84,7 +87,6 @@
       }
 
       export default class ReButton extends React.Component<Prop, State> {
-
         constructor(props: any) {
           super(props)
           this.add = this.add.bind(this)

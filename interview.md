@@ -668,68 +668,65 @@ s();//输出2
 
 **什么是跨域？跨域请求资源的方法有哪些？**
 
-**1、什么是跨域？**
+**1、什么是跨域？🐕**
 
 由于浏览器同源策略，凡是发送请求 url 的协议、域名、端口三者之间任意一与当前页面地址不同即为跨域。存在跨域的情况：
 
-网络协议不同，如 http 协议访问 https 协议。
+ * 网络协议不同，如 http 协议访问 https 协议。
 
-端口不同，如 80 端口访问 8080 端口。
+ * 端口不同，如 80 端口访问 8080 端口。
 
-域名不同，如 http://qianduanblog.com 访问 http://baidu.com。
+ * 域名不同，如 http://qianduanblog.com 访问 http://baidu.com。
 
-子域名不同，如 http://abc.qianduanblog.com 访问 http://def.qianduanblog.com。
+ * 子域名不同，如 http://abc.qianduanblog.com 访问 http://def.qianduanblog.com。
 
-域名和域名对应 ip, 如 http://www.a.com 访问 20.205.28.90.
+ * 域名和域名对应 ip, 如 http://www.a.com 访问 20.205.28.90.
 
-**2、跨域请求资源的方法：**
+**2、跨域请求资源的方法：🐕**
 
-(1)、porxy 代理
+  (1)、porxy 代理
 
-定义和用法：proxy 代理用于将请求发送给后台服务器，通过服务器来发送请求，然后将请求的结果传递给前端。
+  定义和用法：proxy 代理用于将请求发送给后台服务器，通过服务器来发送请求，然后将请求的结果传递给前端。
 
-实现方法：通过 nginx 代理；
+  实现方法：通过 nginx 代理；
 
-注意点：1、如果你代理的是 https 协议的请求，那么你的 proxy 首先需要信任该证书（尤其是自定义证书）或者忽略证书检查，否则你的请求无法成功。
+  注意点：1、如果你代理的是 https 协议的请求，那么你的 proxy 首先需要信任该证书（尤其是自定义证书）或者忽略证书检查，否则你的请求无法成功。
 
-(2)、CORS 【Cross-Origin Resource Sharing】
+  (2)、CORS 【Cross-Origin Resource Sharing】
 
-定义和用法：是现代浏览器支持跨域资源请求的一种最常用的方式。
+  定义和用法：是现代浏览器支持跨域资源请求的一种最常用的方式。
 
-使用方法：一般需要后端人员在处理请求数据的时候，添加允许跨域的相关操作。如下：
+  使用方法：一般需要后端人员在处理请求数据的时候，添加允许跨域的相关操作。如下：
 
-```
-res.writeHead(200, {
- "Content-Type": "text/html; charset=UTF-8",
- "Access-Control-Allow-Origin":'http://localhost',
- 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
- 'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type'
-});
+  ```
+  res.writeHead(200, {
+  "Content-Type": "text/html; charset=UTF-8",
+  "Access-Control-Allow-Origin":'http://localhost',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type'
+  });
 
-```
+  ```
 
-(3)、jsonp
+  (3)、jsonp
 
-定义和用法：通过动态插入一个 script 标签。浏览器对 script 的资源引用没有同源限制，同时资源加载到页面后会立即执行（没有阻塞的情况下）。
+  定义和用法：通过动态插入一个 script 标签。浏览器对 script 的资源引用没有同源限制，同时资源加载到页面后会立即执行（没有阻塞的情况下）。
 
-特点：通过情况下，通过动态创建 script 来读取他域的动态资源，获取的数据一般为 json 格式。
+  特点：通过情况下，通过动态创建 script 来读取他域的动态资源，获取的数据一般为 json 格式。实例如下：
+  ```javascript
+    <script>
+    function testjsonp(data) {
+    console.log(data.name); // 获取返回的结果
+    }
+    </script>
+    <script>
+    var \_script = document.createElement('script');
+    \_script.type = "text/javascript";
+    \_script.src = "http://localhost:8888/jsonp?callback=testjsonp";
+    document.head.appendChild(\_script);
+    </script>
 
-实例如下：
-
-```
-<script>
- function testjsonp(data) {
- console.log(data.name); // 获取返回的结果
- }
-</script>
-<script>
- var \_script = document.createElement('script');
- \_script.type = "text/javascript";
- \_script.src = "http://localhost:8888/jsonp?callback=testjsonp";
- document.head.appendChild(\_script);
-</script>
-
-```
+   ```
 
 缺点：
 
@@ -739,7 +736,7 @@ res.writeHead(200, {
 
 **谈谈垃圾回收机制方式及内存管理**
 
-**回收机制方式**
+**回收机制方式 🐕**
 
 1、定义和用法：垃圾回收机制 (GC:Garbage Collection), 执行环境负责管理代码执行过程中使用的内存。
 
@@ -747,7 +744,7 @@ res.writeHead(200, {
 
 3、实例如下：
 
-```
+```javascript
 function fn1() {
  var obj = {name: 'hanzichi', age: 10};
 }
@@ -776,7 +773,7 @@ fn1 中定义的 obj 为局部变量，而当调用结束后，出了 fn1 的环
 
 　　基本原理：就是变量的引用次数，被引用一次则加 1，当这个引用计数为 0 时，被视为准备回收的对象。
 
-**内存管理**
+**内存管理 🐕**
 
 1、什么时候触发垃圾回收？
 
@@ -804,7 +801,7 @@ IE7 中，垃圾回收器会根据内存分配量与程序占用内存的比例�
 
 实例如下:
 
-```
+```html
 <div id="myDiv">
  <input type="button" value="Click me" id="myBtn">
 </div>
@@ -819,7 +816,7 @@ IE7 中，垃圾回收器会根据内存分配量与程序占用内存的比例�
 
 解决方法如下：
 
-```
+```html
 <div id="myDiv">
  <input type="button" value="Click me" id="myBtn">
 </div>
@@ -837,19 +834,18 @@ IE7 中，垃圾回收器会根据内存分配量与程序占用内存的比例�
 
 实例如下：
 
-```
-function bindEvent(){
- var obj=document.createElement("XXX");
- obj.onclick=function(){
- //Even if it's a empty function
- }
-}
-
+```javascript
+  function bindEvent(){
+  var obj=document.createElement("XXX");
+  obj.onclick=function(){
+  //Even if it's a empty function
+  }
+  }
 ```
 
 解决方法如下：
 
-```
+```javascript
 function bindEvent(){
  var obj=document.createElement("XXX");
  obj.onclick=function(){
@@ -878,7 +874,7 @@ function bindEvent(){
 
 **1、prototype 原型链方式：**
 
-```
+```javascript
 function teacher(name){
  this.name = name;
 }
@@ -901,7 +897,7 @@ student1.sayName();
 
 **2、call ()/apply () 方法**
 
-```
+```javascript
 function teacher(name,age){
 this.name = name;
 this.age = age;
@@ -911,7 +907,7 @@ alert('name:'+name+", age:"+age);
 }
 function student(){
 var args = arguments;
-teacher.call(this,args\[0\],args\[1\]);
+teacher.call(this,args[0],args[1]);
 // teacher.apply(this,arguments);
 }
 var teacher1 = new teacher('xiaoming',23);
@@ -927,44 +923,44 @@ student1.sayhi();
 
 **3、混合方法【prototype,call/apply】**
 
-```
-function teacher(name,age){
-this.name = name;
-this.age = age;
-}
-teacher.prototype.sayName = function(){
-console.log('name:'+this.name);
-}
-teacher.prototype.sayAge = function(){
-console.log('age:'+this.age);
-}
-function student(){
-var args = arguments;
-teacher.call(this,args\[0\],args\[1\]);
-}
-student.prototype = new teacher();
-var student1 = new student('xiaolin',23);
-student1.sayName();
-student1.sayAge();
-// name:xiaolin
-// age:23
+```javascript
+  function teacher(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  teacher.prototype.sayName = function(){
+    console.log('name:'+this.name);
+  }
+  teacher.prototype.sayAge = function(){
+    console.log('age:'+this.age);
+  }
+  function student(){
+    var args = arguments;
+    teacher.call(this,args[0],args[1]);
+  }
+  student.prototype = new teacher();
+  var student1 = new student('xiaolin',23);
+  student1.sayName();
+  student1.sayAge();
+  // name:xiaolin
+  // age:23
 
 ```
 
 **4、对象冒充**
 
-```
+```javascript
 function Person(name,age){
-this.name = name;
-this.age = age;
-this.show = function(){
-console.log(this.name+", "+this.age);
+  this.name = name;
+  this.age = age;
+  this.show = function(){
+  console.log(this.name+", "+this.age);
 }
 }
 function Student(name,age){
-this.student = Person; // 将 Person 类的构造函数赋值给 this.student
-this.student (name,age); //js 中实际上是通过对象冒充来实现继承的
-delete this.student; // 移除对 Person 的引用
+  this.student = Person; // 将 Person 类的构造函数赋值给 this.student
+  this.student (name,age); //js 中实际上是通过对象冒充来实现继承的
+  delete this.student; // 移除对 Person 的引用
 }
 var s = new Student ("小明",17);
 s.show();
@@ -975,23 +971,23 @@ p.show();
 
 ```
 
-**判断一个字符串中出现次数最多的字符，统计这个次数**  
+**判断一个字符串中出现次数最多的字符，统计这个次数 🐕**  
 
-```
+```javascript
 var str = 'asdfssaaasasasasaa';
 var json = {};
 for (var i = 0; i < str.length; i++) {
- if(!json\[str.charAt(i)\]){
- json\[str.charAt(i)\] = 1;
+ if(!json[str.charAt(i)]){
+ json[str.charAt(i)] = 1;
  }else{
- json\[str.charAt(i)\]++;
+ json[str.charAt(i)]++;
 }
 };
 var iMax = 0;
 var iIndex = '';
 for(var i in json){
- if(json\[i\]>iMax){
- iMax = json\[i\];
+ if(json[i]>iMax){
+ iMax = json[i];
  iIndex = i;
  }
 } 
@@ -1012,74 +1008,74 @@ console.log (' 出现次数最多的是:'+iIndex+' 出现 '+iMax+' 次 ');
 
 **Array 对象属性**
 
-constructor 返回对创建此对象的数组函数的引用。
+  constructor 返回对创建此对象的数组函数的引用。
 
-length 设置或返回数组中元素的数目。
+  length 设置或返回数组中元素的数目。
 
-prototype 使您有能力向对象添加属性和方法。
+  prototype 使您有能力向对象添加属性和方法。
 
 **Array 对象方法**
 
-concat () 连接两个或更多的数组，并返回结果。
+* concat () 连接两个或更多的数组，并返回结果。
 
-join () 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
+* join () 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
 
-pop () 删除并返回数组的最后一个元素。
+* pop () 删除并返回数组的最后一个元素。
 
-shift () 删除并返回数组的第一个元素
+* shift () 删除并返回数组的第一个元素
 
-push () 向数组的末尾添加一个或更多元素，并返回新的长度。
+* push () 向数组的末尾添加一个或更多元素，并返回新的长度。
 
-unshift () 向数组的开头添加一个或更多元素，并返回新的长度。
+* unshift () 向数组的开头添加一个或更多元素，并返回新的长度。
 
-reverse () 颠倒数组中元素的顺序。
+* reverse () 颠倒数组中元素的顺序。
 
-slice () 从某个已有的数组返回选定的元素
+* slice () 从某个已有的数组返回选定的元素
 
-sort () 对数组的元素进行排序
+* sort () 对数组的元素进行排序
 
-splice () 删除元素，并向数组添加新元素。
+* splice () 删除元素，并向数组添加新元素。
 
-toSource () 返回该对象的源代码。
+* toSource () 返回该对象的源代码。
 
-toString () 把数组转换为字符串，并返回结果。
+* toString () 把数组转换为字符串，并返回结果。
 
-toLocaleString () 把数组转换为本地数组，并返回结果。
+* toLocaleString () 把数组转换为本地数组，并返回结果。
 
-valueOf () 返回数组对象的原始值
+* valueOf () 返回数组对象的原始值
 
 **编写一个方法 去掉一个数组的重复元素**
 
 方法一：
 
-```
-var arr = \[0,2,3,4,4,0,2\];
-var obj = {};
-var tmp = \[\];
-for(var i = 0 ;i< arr.length;i++){
- if( !obj\[arr\[i\]\] ){
- obj\[arr\[i\]\] = 1;
- tmp.push(arr\[i\]);
- }
-}
-console.log(tmp);
+```javascript
+  var arr = [0,2,3,4,4,0,2];
+  var obj = {};
+  var tmp = [];
+  for(var i = 0 ;i< arr.length;i++){
+    if( !obj[arr[i]] ){
+      obj[arr[i]] = 1;
+      tmp.push(arr[i]);
+    }
+  }
+  console.log(tmp);
 
 ```
 
 结果如下：
 
 ```
-\[0, 2, 3, 4\]
+[0, 2, 3, 4]
 
 ```
 
 方法二：
 
-```
-var arr = \[2,3,4,4,5,2,3,6\],arr2 = \[\];
+```javascript
+var arr = [2,3,4,4,5,2,3,6],arr2 = [];
 for(var i = 0;i< arr.length;i++){
- if(arr2.indexOf(arr\[i\]) < 0){
- arr2.push(arr\[i\]);
+ if(arr2.indexOf(arr[i]) < 0){
+ arr2.push(arr[i]);
  }
 }
 console.log(arr2);
@@ -1089,27 +1085,34 @@ console.log(arr2);
 结果为：  
 
 ```
-\[2, 3, 4, 5, 6\]
+[2, 3, 4, 5, 6]
 
 ```
 
 方法三：
 
-```
-var arr = \[2,3,4,4,5,2,3,6\];
-var arr2 = arr.filter(function(element,index,self){
-return self.indexOf(element) === index;
-});
-console.log(arr2);
+```javascript
+  var arr = [2,3,4,4,5,2,3,6];
+  var arr2 = arr.filter(function(element,index,self){
+  return self.indexOf(element) === index;
+  });
+  console.log(arr2);
 
 ```
 
 结果为：
 
 ```
-\[2, 3, 4, 5, 6\]
+[2, 3, 4, 5, 6]
 
 ```
+方法四：
+  ```javascript
+      let arr = [1,1,22,22,3,4,5]			
+        const set = new Set(arr)			
+        arr = Array.from(set)			
+        console.log(arr)
+  ```
 
 **jQuery 库中的 $() 是什么？**
 
@@ -1117,8 +1120,8 @@ $() 函数是 jQuery () 函数的别称。$() 函数用于将任何对象包裹�
 
 **如何找到所有 HTML select 标签的选中项？**  
 
-```
-$('\[name=selectname\] :selected')
+```javascript
+$('[name=selectname] :selected')
 
 ```
 
@@ -1158,7 +1161,7 @@ $(this) 返回一个 jQuery 对象，你可以对它调用多个 jQuery 方法�
 
 (5)、可见性过滤器选择器：:hidden ，:visible
 
-(6)、属性过滤器选择器：\[attribute\] ，\[attribute=value\] ，\[attribute!=value\] ，\[attribute^=value\] ，\[attribute$=value\] ，\[attribute\*=value\]
+(6)、属性过滤器选择器：[attribute] ，[attribute=value] ，[attribute!=valu\] ，[attribute^=value] ，[attribute$=value] ，[attribute\*=value]
 
 (7)、子元素过滤器选择器：:nth-child ，:first-child ，:last-child ，:only-child
 
@@ -1171,9 +1174,9 @@ $(this) 返回一个 jQuery 对象，你可以对它调用多个 jQuery 方法�
 delegate () 会在以下两个情况下使用到：
 
 1、如果你有一个父元素，需要给其下的子元素添加事件，这时你可以使用 delegate () 了，代码如下：
-
-$("ul").delegate("li", "click", function(){ $(this).hide(); });
-
+  ```javascript
+   $("ul").delegate("li", "click", function(){ $(this).hide(); });
+  ```
 2、当元素在当前页面中不可用时，可以使用 delegate ()
 
 **$(document).ready () 方法和 window.onload 有什么区别？**
@@ -1186,7 +1189,7 @@ $("ul").delegate("li", "click", function(){ $(this).hide(); });
 
 实现代码如下：
 
-```
+```javascript
 <script type="text/javascript" language="javascript">
 　　$(document).ready(function() {
 　　　　window.history.forward(1);
@@ -1212,7 +1215,7 @@ $("ul").delegate("li", "click", function(){ $(this).hide(); });
 
 **写出一个简单的 $.ajax () 的请求方式？**
 
-```
+```javascript
 $.ajax({
  url:'http://www.baidu.com',
  type:'POST',
@@ -1298,7 +1301,7 @@ $("#info\_table").on ("click","td",function (){/ 显示更多信息 /});
 
 **总结：**`.bind ()`, `.live ()`, `.delegate ()`,`.on ()` 分别对应的相反事件为：`.unbind ()`,`.die ()`, `.undelegate ()`,`.off ()`
 
-**什么是盒子模型？**
+**什么是盒子模型？🐕**
 
 在网页中，一个元素占有空间的大小由几个部分构成，其中包括元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分。这四个部分占有的空间中，有的部分可以显示相应的内容，而有的部分只用来分隔相邻的区域或区域。4 个部分一起构成了 css 中元素的盒模型。
 
@@ -1316,7 +1319,7 @@ $("#info\_table").on ("click","td",function (){/ 显示更多信息 /});
 
 **HTML 结构：**
 
-```
+```html
 <div class="wrapper">
  <div class="content"></div>
 </div>
@@ -1325,7 +1328,7 @@ $("#info\_table").on ("click","td",function (){/ 显示更多信息 /});
 
 **CSS：**
 
-```
+```css
 .wrapper {
  position: relative;
  width: 500px;
@@ -1348,7 +1351,7 @@ $("#info\_table").on ("click","td",function (){/ 显示更多信息 /});
 
 ```
 
-**简述一下 src 与 href 的区别**
+**简述一下 src 与 href 的区别 🐕**
 
 href 是指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，用于超链接。
 
@@ -1478,7 +1481,7 @@ onload 事件的触发，表示页面包含图片等文件在内的所有元素�
 
 **写一个 function，清除字符串前后的空格。（兼容所有浏览器）**
 
-```
+```javascript
 function trim(str) {
  if (str && typeof str === "string") {
  return str.replace(/(^s)|(s)$/g,""); // 去除前后空白符
@@ -1489,11 +1492,10 @@ function trim(str) {
 
 **使用正则表达式验证邮箱格式**  
 
-```
+```javascript
 var reg = /^(w)+(.w+)\*@(w)+((.w{2,3}){1,3})$/;
 var email = "example@qq.com";
 console.log(reg.test(email)); // true
-
 ```
 
 规避 javascript 多人开发函数重名问题
