@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
+import store from '../store'
 interface State {
-  count: number,
   className: string
 }
 
@@ -14,9 +14,8 @@ export default class ReButton extends React.Component<Prop, State> {
   constructor(props: any) {
     super(props)
     this.add = this.add.bind(this)
-    this.myRef = React.createRef<any>()
+
     this.state = {
-      count: 0,
       className: ''
     }
   }
@@ -25,13 +24,12 @@ export default class ReButton extends React.Component<Prop, State> {
     e.preventDefault()
 
     let className = classNames({
-      "re-button": this.state.count % 2 === 1
+      "re-button": store.getState() % 2 === 1
     })
     this.setState({
-      count: this.state.count + 1,
       className: className
     })
-    console.log(this.myRef)
+    store.dispatch({ type: 'INCREMENT' })
   }
 
 
@@ -43,7 +41,7 @@ export default class ReButton extends React.Component<Prop, State> {
       <div>
         <button ref={this.myRef} className={this.state.className} onClick={this.add}>测试</button>
         <div>
-          {this.state.count}
+          {store.getState()}
         </div>
       </div>
 
