@@ -40,21 +40,15 @@ var items = lists.GroupBy(p => p.CartonNo).Select(g => g.First()).ToList();
     cache 50  --设置缓存cache个序列，如果系统down掉了或者其它情况将会导致序列不连续，也可以设置为---NOCACHE防止跳号
     cycle; 
 
-    SELECT * FROM TCL_ODF_BOMLIST
-          WHERE TCL_ODF_BOM_ID = 6035978
-            AND (
-                  BAUGR LIKE '08-%-MA300AA' OR
-                  BAUGR LIKE '%-%-MP300AA'  OR 
-                  BAUGR LIKE '%-%-PW300AA'
-                  )
-            AND (
-                  ARBPL = 'SUBN' OR
-                  ARBPL = 'HLSKDN' OR
-                  ARBPL = 'HZSUBN' OR
-                  ARBPL = 'HLSKD' OR
-                  ARBPL = 'ALSUB'
-                )
-    ```
+    PUT my-index-000001/_mapping
+      {
+        "properties": {
+          "my_field": { 
+            "type":     "text",
+            "fielddata": true
+          }
+        }
+      }
 
 
 
