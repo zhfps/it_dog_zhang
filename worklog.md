@@ -31,6 +31,7 @@ var items = lists.GroupBy(p => p.CartonNo).Select(g => g.First()).ToList();
 ```
 
 ##### 5.序列问题
+
   ```sql
     create sequence PCBA_WO_SE
     minvalue 1  --增长最小值
@@ -49,16 +50,4 @@ var items = lists.GroupBy(p => p.CartonNo).Select(g => g.First()).ToList();
           }
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
+  ```
