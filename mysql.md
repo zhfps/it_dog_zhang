@@ -1,3 +1,36 @@
+- DDL
+
+  - 插入语句 insert
+
+    ```sql
+    insert into 表 (列,...) values(值,);
+    //范例
+    insert into sys_user (UserName, NickName, Password) values ('张三','张三','12345')
+    //注意：字段和值一一对应
+    
+    insert into 表 set 列 = 值,...
+    //范例
+    insert into sys_user set UserName = '张三',NickName= '张三',Password= '1234'
+    ```
+
+  - 更新语句update
+
+    ```sql
+    update 表 set 列 = 值,... Where 筛选条件
+    ```
+
+  - 删除delete
+
+    ```sql
+    delete from 表 where 筛选条件
+    
+    truncate table 表
+    ```
+
+    [^p110]: 2020/12/28
+
+    
+
 - 查询去重(distinct)
 
   select distinct xx  from xx;
@@ -459,9 +492,9 @@
    
        
 
--  MySQL高级
-  
-  1. ​               
+- MySQL高级
+
+  ​            
 
 ​     
 
