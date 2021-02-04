@@ -27,9 +27,30 @@
     truncate table 表
     ```
 
-    [^p110]: 2020/12/28
+  - 创建数据库
 
-    
+    ```sql
+    create database if not exists 库
+    ```
+
+  - 删除
+
+    ```sql
+    drop database if exists 库
+    ```
+
+- 约束
+
+  - NOT NULL
+  - DEFAULT
+  - PRIMARY KEY
+  - UNIQUE
+  - CHECK
+  - FOREIGN KEY
+
+- 标识列
+
+- 事务
 
 - 查询去重(distinct)
 
