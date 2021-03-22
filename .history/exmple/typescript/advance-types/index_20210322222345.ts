@@ -16,4 +16,4 @@ function reverse(x: number): boolean {
   }
  
 };
-console.log(reverse(121))
+console.log(reverse(-123))

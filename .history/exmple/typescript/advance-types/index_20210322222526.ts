@@ -1,5 +1,5 @@
 function reverse(x: number): boolean {
-  if(x < 0 || x<-2147483648 || x>2147483647){
+  if(x < 0 || x<-2147483648 || x>2147483647 || x%10 == 0){
     return false
   }else{
     let num:number = 0;
