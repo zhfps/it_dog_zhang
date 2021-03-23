@@ -15,9 +15,9 @@ function romanToInt(s: string): number {
     
    const B =lom[arr[i]]
    if(A>B){
-     num = num - B
+     num = num + A - B
    }else{
-     num = num + B
+     num = num + A + B
    }
    A = B
    

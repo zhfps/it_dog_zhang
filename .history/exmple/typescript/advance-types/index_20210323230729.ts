@@ -10,19 +10,21 @@ function romanToInt(s: string): number {
  }
  let num = 0;
  let arr = s.split('')
- let A = 0
- for(let i=arr.length-1;i>=0;i--){{
+ for(let i=arr.length-1;i>=0;){{
     
-   const B =lom[arr[i]]
-   if(A>B){
-     num = num - B
-   }else{
-     num = num + B
+   const A =lom[arr[i]]
+    let B = 0
+   if(i-1>=0){
+    B =lom[arr[i-1]]
    }
-   A = B
-   
+   i=i-2
+   if(A>B){
+     num = num+A-B
+   }else{
+     num = num+A+B
+   }
  }}
- return num
+ return 0
 
 };
-console.log(romanToInt('MCDLXXVI'))
+romanToInt('III')
