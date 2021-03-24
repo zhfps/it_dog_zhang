@@ -1,28 +1,37 @@
-function romanToInt(s: string): number {
- const lom:any = {
-   I:1,
-   V:5,
-   X:10,
-   L:50,
-   C:100,
-   D:500,
-   M:1000
- }
- let num = 0;
- let arr = s.split('')
- let A = 0
- for(let i=arr.length-1;i>=0;i--){{
-    
-   const B =lom[arr[i]]
-   if(A>B){
-     num = num - B
-   }else{
-     num = num + B
-   }
-   A = B
-   
- }}
- return num
+function longestCommonPrefix(strs: string[]): string {
+  let str = '';
+  if(strs.length === 0){
+    return ""
+  }
+  if(strs.length === 1){
+    return strs[0]
+  }
+  let num = strs[0].length-1;
+  for (const item of strs) {
+    if(item.length-1 <num){
+      num = item.length-1
+    }
+  }
+  let i =0
+  while(num>=i){
+    let key = strs[0].charAt(i)
+    let check = true
+    for (const item of strs) {
+      if(item.charAt(i) !== key){
+        check = false
+        break;
+      }
+    }
+    if(check === false){
+      break;
+    }else{
+      str +=key
+    }
+    i++
+  }
+  return str
 
-};
-console.log(romanToInt('MCDLXXVI'))
+}
+console.log(longestCommonPrefix(["flower","flower","flower","flower"]
+))
+
