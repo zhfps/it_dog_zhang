@@ -10,26 +10,27 @@
 
 
  function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-        let  l3 = new ListNode(0);
-        let cur = l3;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                cur.next = l1;
-                cur = cur.next;
-                l1 = l1.next;
-            } else {
-                cur.next = l2;
-                cur = cur.next;
-                l2 = l2.next;
-            }
+   let l3:ListNode = new ListNode()
+   while(l1 && l2){
+     console.log('x')
+     let item = new ListNode()
+     if(l1 && l2){
+      if(l1.val <= l2.val){
+        item.val = l1.val 
+        if(l1.next){
+          l1 = l1.next
+        }else{
+          l3
         }
-        // 任一为空，直接连接另一条链表
-        if (l1 == null) {
-            cur.next = l2;
-        } else {
-            cur.next = l1;
-        }
-        return l3.next;
+       
+      }else{
+       item.val = l2.val 
+       l2 = l2.next
+      }
+      l3.next = item
+     }    
+   }
+   return l3.next
 };
 
 const l1 = new ListNode(1,null)

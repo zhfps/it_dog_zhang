@@ -10,8 +10,8 @@
 
 
  function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-        let  l3 = new ListNode(0);
-        let cur = l3;
+        let  dummyHead = new ListNode(0);
+        let cur = dummyHead;
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
                 cur.next = l1;
@@ -29,7 +29,7 @@
         } else {
             cur.next = l1;
         }
-        return l3.next;
+        return dummyHead.next;
 };
 
 const l1 = new ListNode(1,null)
