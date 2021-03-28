@@ -1,9 +1,9 @@
 function removeDuplicates(nums: number[]): number {
 
     let j = 0;
-    for(let i=1; i < nums.length; i++){
-        if(nums[i]==nums[j]){
-            nums[++j] = nums[i]
+    for(let i=0; i < nums.length; i++){
+        if(nums[i]=nums[j]){
+            nums[i] = nums[j]
         }
     }
 
