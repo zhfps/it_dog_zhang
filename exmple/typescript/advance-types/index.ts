@@ -1,13 +1,17 @@
-function searchInsert(nums: number[], target: number): number {
-    let j = -1
-    let i=0
-    for(; i<nums.length;i++){
-      if(nums[i] >= target){
-          j = i
-          break
-      }
+function lengthOfLastWord(s: string): number {
+ let l = 0
+ for(let i = s.length-1;i>=0;i--){
+  if(s.charAt(i) == ' ' && l ==0){
+    continue
+  }else{
+    if(s.charAt(i) ===' ' && l>0){
+     break
+    }else{
+     l++
+    }
   }
-  return j>-1?j:i
+ }
+ return l
 };
 
-console.log(searchInsert([1,2,3,4,5],6))
+console.log(lengthOfLastWord('a b  '))
