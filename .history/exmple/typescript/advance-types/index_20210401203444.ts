@@ -6,11 +6,7 @@ function plusOne(digits: number[]): number[] {
     } 
     digits[i] = 0;
   }
-  if(digits[0] === 0){
-    digits.unshift(1)
-  }
   return digits
 };
 
-
-console.log(plusOne([9,9]))
+console.log(plusOne([9]))
