@@ -3,40 +3,32 @@ function addBinary(a: string, b: string): string {
     let bl = b.length-1;
     let temp = 0
     let result = ''
-    while(al>-1 || bl>-1){
+    while(al>0 && bl>0){
       let ai = 0
-      if(al>-1){
-        ai = Number(a.charAt(al))
+      if(al>0){
+        al =Number(a.charAt(al))
       }
       let bi = 0
-      if(bl>-1){
-        bi = Number(b.charAt(bl))
+      if(bl>0){
+        Number(b.charAt(bl))
       }
 
       let nu = ai + bi +temp
-      if(nu === 1){
+      if(nu ===1){
         result = '1'+ result
         temp = 0
-      }else if(nu === 2){
+      }else if(nu===2){
         result = '0'+ result
         temp = 1
-      }else if(nu===0){
-        result = '0'+ result
-        temp = 0
-      }else if(nu === 3){
+      }else{
         result = '1'+ result
         temp = 1
       }
       al--
       bl--
     }
-    console.log(temp)
-    if(temp === 1){
-      return '1'+ result
-    }else{
-      return result
-    }
-   
+
+    return result
 };
 
 console.log(addBinary('111','101'))

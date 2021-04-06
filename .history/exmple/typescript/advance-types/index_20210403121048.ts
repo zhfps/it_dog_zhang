@@ -5,11 +5,11 @@ function addBinary(a: string, b: string): string {
     let result = ''
     while(al>-1 || bl>-1){
       let ai = 0
-      if(al>-1){
+      if(al>0){
         ai = Number(a.charAt(al))
       }
       let bi = 0
-      if(bl>-1){
+      if(bl>0){
         bi = Number(b.charAt(bl))
       }
 

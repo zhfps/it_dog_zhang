@@ -5,38 +5,34 @@ function addBinary(a: string, b: string): string {
     let result = ''
     while(al>-1 || bl>-1){
       let ai = 0
-      if(al>-1){
+      if(al>0){
         ai = Number(a.charAt(al))
+        console.log(al)
       }
       let bi = 0
-      if(bl>-1){
+      if(bl>0){
         bi = Number(b.charAt(bl))
       }
 
       let nu = ai + bi +temp
-      if(nu === 1){
+      if(nu ===1){
         result = '1'+ result
         temp = 0
-      }else if(nu === 2){
+      }else if(nu===2){
         result = '0'+ result
         temp = 1
       }else if(nu===0){
         result = '0'+ result
         temp = 0
-      }else if(nu === 3){
+      }else{
         result = '1'+ result
         temp = 1
       }
       al--
       bl--
     }
-    console.log(temp)
-    if(temp === 1){
-      return '1'+ result
-    }else{
-      return result
-    }
-   
+
+    return result
 };
 
 console.log(addBinary('111','101'))
